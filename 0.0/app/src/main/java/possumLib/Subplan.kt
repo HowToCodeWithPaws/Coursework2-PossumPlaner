@@ -1,6 +1,7 @@
 package possumLib
 
-class Goal() {
+class Subplan(title_: String, isFinished_: Boolean = false) {
+
     private var isFinished: Boolean
         get() {
             return isFinished
@@ -11,7 +12,7 @@ class Goal() {
             }
         }
 
-    fun changeDone() {
+    fun changeFinished() {
         isFinished = !isFinished
     }
 
@@ -25,8 +26,8 @@ class Goal() {
             }
         }
 
-    constructor(name: String, done: Boolean = false) : this() {
-        isFinished = done
-        title = name
+    init {
+        isFinished = isFinished_
+        title = title_
     }
 }
