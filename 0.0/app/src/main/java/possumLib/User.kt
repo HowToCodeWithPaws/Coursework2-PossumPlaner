@@ -1,0 +1,4 @@
+package possumLib
+
+class User {
+}
