@@ -3,7 +3,7 @@ package possumLib
 import java.util.*
 
 enum class possibleRepetitions {
-    NONE, DAILY, WEEKLY, MONTHLY
+    NONE, DAILY, WEEKLY, MONTHLY ///TODO рандомно на выбор пользователя
 }
 
 enum class possiblePutOffs {
