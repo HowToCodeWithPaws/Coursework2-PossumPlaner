@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
     var password_: String = ""
     var accounts = mutableMapOf("12345" to "12345")
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
 
         input.text = "\n${login_}\n${password_}\n"
         input.refreshDrawableState()
+                //TODO разобраться с файлами?????
+        //TODO возможно мы хотим отправлять запросы на сервер
         //  file.writeText("блять")
         //   file.appendText("\n" + login_ + "\n" + password_ + "\n")
         //   fromFile.text = "ршшшш"
