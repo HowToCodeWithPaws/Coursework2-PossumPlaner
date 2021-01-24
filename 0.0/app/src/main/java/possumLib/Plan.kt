@@ -15,7 +15,7 @@ enum class possibleReminders {
 }
 
 class Plan(title_: String, isFinished_: Boolean = false,
-           category_: String = "", importance_: Int = 1,
+           category_: Category, importance_: Int = 1,
            subplans_: ArrayList<Subplan> = ArrayList(),
            repetition_: possibleRepetitions = possibleRepetitions.NONE,
            putOff_: possiblePutOffs = possiblePutOffs.NONE,
@@ -48,14 +48,12 @@ class Plan(title_: String, isFinished_: Boolean = false,
             }
         }
 
-    private var category: String
+    private var category: Category
         get() {
             return category
         }
         set(value) {
-            if (value.length in 1..9) {
                 category = value
-            }
         }
 
     private var importance: Int
