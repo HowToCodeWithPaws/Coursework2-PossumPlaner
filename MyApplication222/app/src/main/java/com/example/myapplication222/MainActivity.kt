@@ -21,7 +21,6 @@ var set = false
         }else{
             set = false
             button.text = "it aint much"
-
         }
     }
 }

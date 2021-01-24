@@ -55,5 +55,10 @@ class User(name_:String, token_: String, plans_: ArrayList<Plan> = ArrayList(), 
         categories.remove(category)
     }
 
-
+    init {
+        name = name_
+        token = token_
+        plans = plans_
+        categories = categories_
+    }
 }
