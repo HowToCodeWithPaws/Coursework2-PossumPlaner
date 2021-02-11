@@ -1,50 +1,42 @@
 package com.example.attemptatautentification
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import com.example.attemptatautentification.auth.AuthManager;
+
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
-import java.io.FileInputStream
-import java.nio.file.Paths
 
 class MainActivity : AppCompatActivity() {
     var login_: String = ""
     var password_: String = ""
     var accounts = mutableMapOf("12345" to "12345")
-    private lateinit var auth: FirebaseAuth
+    var authManager : AuthManager = AuthManager()
 
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //это подрубается лайаут
         setContentView(R.layout.activity_main)
-        // Initialize Firebase Auth
-        auth = Firebase.auth
-
+        //всё видненько
         login.isVisible = true
         password.isVisible = true
         signIn.isVisible = true
         logIn.isVisible = true
     }
 
+    //при запуске приложеньки
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
+        // если ты уже зареган то обнови это в интерфейсе
+        updateUI(authManager.currentUser)
     }
 
+    //что это Наташа
     fun getAnswer(
             login_: String, password_: String
     ) {
@@ -77,106 +69,48 @@ class MainActivity : AppCompatActivity() {
          getAnswer(login_, password_)
      }
  */
+    //Кнопочка зарегаться
     fun LogIn(view: View) {
-        logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
-        signIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
-    }
-
-    fun SignIn(view: View) {
-        signIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
-        logIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
+        //logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
+        //signIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
         password_ = password.text.toString()
-        signIn(login_, password_)
+        if (authManager.createNewAccount(login_, password_))
+        {
+            updateUI(authManager.currentUser)
+        }
+        else{
+            updateUI("Не получилось создать аккаунт")
+        }
     }
 
+    //Кнопочка войти
+    fun SignIn(view: View) {
+        //signIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
+        //logIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
+        login_ = login.text.toString()
+        password_ = password.text.toString()
+        if (authManager.signIn(login_, password_)){
+            updateUI(authManager.currentUser)
+        }
+        else{
+            updateUI("Не получилось войти в аккаунт")
+        }
+    }
+
+    //дефолтно обновляем интерфейс для юзера
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             input.text = user.email
         } else {
-            input.text = "null"
+            updateUI("Нет пользователя")
         }
         input.refreshDrawableState()
     }
 
-    /*  private fun createAccount(email: String, password: String) {
-          // [START create_user_with_email]
-          auth.createUserWithEmailAndPassword(email, password)
-              .addOnCompleteListener(this) { task ->
-                  if (task.isSuccessful) {
-                      // Sign in success, update UI with the signed-in user's information
-                      Log.d(TAG, "createUserWithEmail:success")
-                      val user = auth.currentUser
-                     updateUI(user)
-                  } else {
-                      // If sign in fails, display a message to the user.
-                      Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                      updateUI(null)
-                      Toast.makeText(baseContext, "Authentication failed.",
-                          Toast.LENGTH_SHORT).show()
-                  }
-              }
-          // [END create_user_with_email]
-      }
-  */
-    fun signIn(email: String, password: String) {
-/*        Log.d(TAG, "signIn:$email")
-        if (!validateForm()) {
-            return
-        }*/
-
-
-        // [START sign_in_with_email]
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success")
-                        val user = auth.currentUser
-                        updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
-                        updateUI(null)
-                        // [START_EXCLUDE]
-                        // checkForMultiFactorFailure(task.exception!!)
-                        // [END_EXCLUDE]
-                    }
-
-                    /*// [START_EXCLUDE]
-                    if (!task.isSuccessful) {
-                        binding.status.setText(R.string.auth_failed)
-                    }
-                    // [END_EXCLUDE]*/
-                }
-        // [END sign_in_with_email]
-    }
-
-
-    /* private fun getUserProfile() {
-         // [START get_user_profile]
-         val user = Firebase.auth.currentUser
-         user?.let {
-             // Name, email address, and profile photo Url
-             val name = user.displayName
-             val email = user.email
-             val photoUrl = user.photoUrl
-
-             // Check if user's email is verified
-             val emailVerified = user.isEmailVerified
-
-             // The user's ID, unique to the Firebase project. Do NOT use this value to
-             // authenticate with your backend server, if you have one. Use
-             // FirebaseUser.getToken() instead.
-             val uid = user.uid
-         }
-         // [END get_user_profile]
-     }*/
-
-    companion object {
-        private const val TAG = "EmailPassword"
-        private const val RC_MULTI_FACTOR = 9005
+    //дефолтно обновляем интерфейс для юзера
+    fun updateUI(warning: String) {
+        input.text = warning
+        input.refreshDrawableState()
     }
 }
