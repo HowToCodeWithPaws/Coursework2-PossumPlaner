@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     var login_: String = ""
     var password_: String = ""
-    var accounts = mutableMapOf("12345" to "12345")
     var authManager : AuthManager = AuthManager()
 
 //    @RequiresApi(Build.VERSION_CODES.O)
@@ -36,32 +35,6 @@ class MainActivity : AppCompatActivity() {
         updateUI(authManager.currentUser)
     }
 
-    //что это Наташа
-    fun getAnswer(
-            login_: String, password_: String
-    ) {
-        if (accounts.containsKey(login_) && accounts[login_] == password_) {
-            fromFile.text = "Hello, ${login_}! You successfully logged in"
-            input.refreshDrawableState()
-        } else {
-            if (!accounts.containsKey(login_)) {
-                accounts.put(login_, password_)
-                fromFile.text = "Hello, ${login_}! You successfully signed in"
-                input.refreshDrawableState()
-            } else {
-                fromFile.text = "${login_}, your password is wrong"
-                input.refreshDrawableState()
-            }
-        }
-    }
-
-
-    //TODO разобраться с файлами?????
-         //TODO возможно мы хотим отправлять запросы на сервер
-         //  file.writeText("блять")
-         //   file.appendText("\n" + login_ + "\n" + password_ + "\n")
-         //   fromFile.text = "ршшшш"
-
     //Кнопочка зарегаться
     fun LogIn(view: View) {
         //logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
@@ -79,8 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     //Кнопочка войти
     fun SignIn(view: View) {
-        //signIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
-        //logIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
         password_ = password.text.toString()
         if (authManager.signIn(login_, password_)){
