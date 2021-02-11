@@ -2,6 +2,7 @@ package com.example.attemptatautentification.auth
 
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import java.util.concurrent.Executor
@@ -39,10 +40,10 @@ class AuthManager {
      * @param password пароль.
      * @return получилось ли создать пользователя.
      */
-    fun createNewAccount(email: String?, password: String?): Boolean {
+    fun createNewAccount(email: String, password: String): Boolean {
         val result = BooleanArray(1)
         mAuth.createUserWithEmailAndPassword(email!!, password!!)
-                .addOnCompleteListener((this as Executor), OnCompleteListener { task ->
+                .addOnCompleteListener(this , OnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success")
@@ -62,10 +63,10 @@ class AuthManager {
      * @param password пароль.
      * @return получилось ли зайти в аккаунт.
      */
-    fun signIn(email: String?, password: String?): Boolean {
+    fun signIn(email: String, password: String): Boolean {
         val result = BooleanArray(1)
         mAuth.signInWithEmailAndPassword(email!!, password!!)
-                .addOnCompleteListener((this as Executor), OnCompleteListener { task ->
+                .addOnCompleteListener(this, OnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success")
@@ -102,5 +103,9 @@ class AuthManager {
     companion object {
         private const val TAG = "EmailPassword"
     }
+
+}
+
+private fun <TResult> Task<TResult>.addOnCompleteListener(authManager: AuthManager, onCompleteListener: OnCompleteListener<TResult>) {
 
 }

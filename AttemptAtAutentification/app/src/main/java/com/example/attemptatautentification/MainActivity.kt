@@ -55,20 +55,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /* fun Confirm(view: View) {
-         login_ = login.text.toString()
-         password_ = password.text.toString()
 
-         input.text = "\n${login_}\n${password_}\n"
-         input.refreshDrawableState()
-                 //TODO разобраться с файлами?????
+    //TODO разобраться с файлами?????
          //TODO возможно мы хотим отправлять запросы на сервер
          //  file.writeText("блять")
          //   file.appendText("\n" + login_ + "\n" + password_ + "\n")
          //   fromFile.text = "ршшшш"
-         getAnswer(login_, password_)
-     }
- */
+
     //Кнопочка зарегаться
     fun LogIn(view: View) {
         //logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
