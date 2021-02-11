@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Initialize Firebase Auth
         auth = Firebase.auth
+
+        login.isVisible = true
+        password.isVisible = true
+        signIn.isVisible = true
+        logIn.isVisible = true
     }
 
     public override fun onStart() {
@@ -73,18 +78,13 @@ class MainActivity : AppCompatActivity() {
      }
  */
     fun LogIn(view: View) {
-        login.isVisible = true
-        password.isVisible = true
-        confirm.isVisible = true
+        logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
+        signIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
     }
 
     fun SignIn(view: View) {
-        login.isVisible = true
-        password.isVisible = true
-        confirm.isVisible = true
-    }
-
-    fun Confirm(view: View) {
+        signIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
+        logIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
         password_ = password.text.toString()
         signIn(login_, password_)
