@@ -58,54 +58,67 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-   /* fun Confirm(view: View) {
+    /* fun Confirm(view: View) {
+         login_ = login.text.toString()
+         password_ = password.text.toString()
+
+         input.text = "\n${login_}\n${password_}\n"
+         input.refreshDrawableState()
+                 //TODO разобраться с файлами?????
+         //TODO возможно мы хотим отправлять запросы на сервер
+         //  file.writeText("блять")
+         //   file.appendText("\n" + login_ + "\n" + password_ + "\n")
+         //   fromFile.text = "ршшшш"
+         getAnswer(login_, password_)
+     }
+ */
+    fun LogIn(view: View) {
+        login.isVisible = true
+        password.isVisible = true
+        confirm.isVisible = true
+    }
+
+    fun SignIn(view: View) {
+        login.isVisible = true
+        password.isVisible = true
+        confirm.isVisible = true
+    }
+
+    fun Confirm(view: View) {
         login_ = login.text.toString()
         password_ = password.text.toString()
+        signIn(login_, password_)
+    }
 
-        input.text = "\n${login_}\n${password_}\n"
-        input.refreshDrawableState()
-                //TODO разобраться с файлами?????
-        //TODO возможно мы хотим отправлять запросы на сервер
-        //  file.writeText("блять")
-        //   file.appendText("\n" + login_ + "\n" + password_ + "\n")
-        //   fromFile.text = "ршшшш"
-        getAnswer(login_, password_)
-    }
-*/
-    fun Confirm(view: View){
-       login_ = login.text.toString()
-       password_ = password.text.toString()
-       signIn(login_, password_)
-    }
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             input.text = user.email
-        }
-        else{
+        } else {
             input.text = "null"
         }
         input.refreshDrawableState()
     }
-  /*  private fun createAccount(email: String, password: String) {
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                   updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    updateUI(null)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
-        // [END create_user_with_email]
-    }
-*/
+
+    /*  private fun createAccount(email: String, password: String) {
+          // [START create_user_with_email]
+          auth.createUserWithEmailAndPassword(email, password)
+              .addOnCompleteListener(this) { task ->
+                  if (task.isSuccessful) {
+                      // Sign in success, update UI with the signed-in user's information
+                      Log.d(TAG, "createUserWithEmail:success")
+                      val user = auth.currentUser
+                     updateUI(user)
+                  } else {
+                      // If sign in fails, display a message to the user.
+                      Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                      updateUI(null)
+                      Toast.makeText(baseContext, "Authentication failed.",
+                          Toast.LENGTH_SHORT).show()
+                  }
+              }
+          // [END create_user_with_email]
+      }
+  */
     fun signIn(email: String, password: String) {
 /*        Log.d(TAG, "signIn:$email")
         if (!validateForm()) {
@@ -115,53 +128,52 @@ class MainActivity : AppCompatActivity() {
 
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                    // [START_EXCLUDE]
-                   // checkForMultiFactorFailure(task.exception!!)
-                    // [END_EXCLUDE]
-                }
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success")
+                        val user = auth.currentUser
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show()
+                        updateUI(null)
+                        // [START_EXCLUDE]
+                        // checkForMultiFactorFailure(task.exception!!)
+                        // [END_EXCLUDE]
+                    }
 
-                /*// [START_EXCLUDE]
-                if (!task.isSuccessful) {
-                    binding.status.setText(R.string.auth_failed)
+                    /*// [START_EXCLUDE]
+                    if (!task.isSuccessful) {
+                        binding.status.setText(R.string.auth_failed)
+                    }
+                    // [END_EXCLUDE]*/
                 }
-                // [END_EXCLUDE]*/
-            }
         // [END sign_in_with_email]
     }
 
 
+    /* private fun getUserProfile() {
+         // [START get_user_profile]
+         val user = Firebase.auth.currentUser
+         user?.let {
+             // Name, email address, and profile photo Url
+             val name = user.displayName
+             val email = user.email
+             val photoUrl = user.photoUrl
 
-   /* private fun getUserProfile() {
-        // [START get_user_profile]
-        val user = Firebase.auth.currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
+             // Check if user's email is verified
+             val emailVerified = user.isEmailVerified
 
-            // Check if user's email is verified
-            val emailVerified = user.isEmailVerified
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            val uid = user.uid
-        }
-        // [END get_user_profile]
-    }*/
+             // The user's ID, unique to the Firebase project. Do NOT use this value to
+             // authenticate with your backend server, if you have one. Use
+             // FirebaseUser.getToken() instead.
+             val uid = user.uid
+         }
+         // [END get_user_profile]
+     }*/
 
     companion object {
         private const val TAG = "EmailPassword"
