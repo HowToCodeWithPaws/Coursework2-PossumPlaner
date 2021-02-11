@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "363635179411",
+    "project_id": "possum-planner-bbc00",
+    "storage_bucket": "possum-planner-bbc00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363635179411:android:814d5a6d2a2c112e05b266",
+        "android_client_info": {
+          "package_name": "com.example.attemptatautentification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363635179411-m7vieheeirjt3hvhulpq9msrfvdujc85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4iCFC-KNz9K2JcGouyvhubzybvk-6068"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363635179411-m7vieheeirjt3hvhulpq9msrfvdujc85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363635179411:android:6a6ce9095466cfe305b266",
+        "android_client_info": {
+          "package_name": "com.example.myapplication222"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363635179411-m7vieheeirjt3hvhulpq9msrfvdujc85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4iCFC-KNz9K2JcGouyvhubzybvk-6068"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363635179411-m7vieheeirjt3hvhulpq9msrfvdujc85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
