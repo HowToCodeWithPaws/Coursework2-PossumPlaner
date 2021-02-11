@@ -68,7 +68,11 @@ class MainActivity : AppCompatActivity() {
         //signIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
         password_ = password.text.toString()
-        if (authManager.createNewAccount(login_, password_))
+
+        authManager.createNewAccount(login_, password_)
+
+
+        if (authManager.currentUser?.email.equals(login_))
         {
             updateUI(authManager.currentUser)
         }
@@ -83,7 +87,9 @@ class MainActivity : AppCompatActivity() {
         //logIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
         password_ = password.text.toString()
-        if (authManager.signIn(login_, password_)){
+
+        authManager.signIn(login_, password_)
+        if (authManager.currentUser?.email.equals(login_)){
             updateUI(authManager.currentUser)
         }
         else{

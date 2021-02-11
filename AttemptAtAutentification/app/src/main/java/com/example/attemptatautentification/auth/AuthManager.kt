@@ -2,10 +2,8 @@ package com.example.attemptatautentification.auth
 
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import java.util.concurrent.Executor
 
 /**
  * Менеджер для работы с авторизацией пользователей.
@@ -34,28 +32,27 @@ class AuthManager {
     val currentUser: FirebaseUser?
         get() = mAuth.currentUser
 
+
     /**
      * Завести нового пользователя с соответствующими параметрами.
      * @param email электронная почта.
      * @param password пароль.
      * @return получилось ли создать пользователя.
      */
-    fun createNewAccount(email: String, password: String): Boolean {
-        val result = BooleanArray(1)
-        mAuth.createUserWithEmailAndPassword(email!!, password!!)
-                .addOnCompleteListener(this , OnCompleteListener { task ->
+    fun createNewAccount(email: String, password: String)  {
+     mAuth.createUserWithEmailAndPassword(email!!, password!!)
+                .addOnCompleteListener(OnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success")
-                        result[0] = true
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        result[0] = false
                     }
                 })
-        return result[0]
+
     }
+
 
     /**
      * Войти в аккаунт пользователя.
@@ -63,21 +60,21 @@ class AuthManager {
      * @param password пароль.
      * @return получилось ли зайти в аккаунт.
      */
-    fun signIn(email: String, password: String): Boolean {
-        val result = BooleanArray(1)
+    fun signIn(email: String, password: String) {
+
         mAuth.signInWithEmailAndPassword(email!!, password!!)
-                .addOnCompleteListener(this, OnCompleteListener { task ->
+                .addOnCompleteListener(OnCompleteListener { task ->
+
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success")
-                        result[0] = true
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        result[0] = false
                     }
                 })
-        return result[0]
+
+
     }
 
     /* private fun getUserProfile() {
@@ -106,6 +103,6 @@ class AuthManager {
 
 }
 
-private fun <TResult> Task<TResult>.addOnCompleteListener(authManager: AuthManager, onCompleteListener: OnCompleteListener<TResult>) {
+/*private fun <TResult> Task<TResult>.addOnCompleteListener(authManager: AuthManager, onCompleteListener: OnCompleteListener<TResult>): Task<AuthResult> {
 
-}
+}*/
