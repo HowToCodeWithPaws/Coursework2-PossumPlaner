@@ -39,8 +39,8 @@ class AuthManager {
      * @param password пароль.
      * @return получилось ли создать пользователя.
      */
-    fun createNewAccount(email: String, password: String)  {
-     mAuth.createUserWithEmailAndPassword(email!!, password!!)
+    fun createNewAccount(email: String, password: String) {
+        mAuth.createUserWithEmailAndPassword(email!!, password!!)
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
@@ -50,6 +50,7 @@ class AuthManager {
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     }
                 })
+        signIn(email, password)
 
     }
 
