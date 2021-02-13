@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
     //дефолтно обновляем интерфейс для юзера
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
+            //todo Наташа
             input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email).toString()
         } else {
             updateUI("Нет пользователя")
