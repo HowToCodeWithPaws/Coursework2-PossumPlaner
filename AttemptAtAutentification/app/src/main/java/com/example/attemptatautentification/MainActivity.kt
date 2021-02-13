@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
+             //todo Наташа
             input.text = user.email
         } else {
             input.text = "null"
