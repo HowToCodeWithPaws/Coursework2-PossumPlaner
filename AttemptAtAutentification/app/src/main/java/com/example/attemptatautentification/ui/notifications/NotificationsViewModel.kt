@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class NotificationsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "They call it a Royale with cheese."
+        value = "(Because 7 is a prime number and prime numbers can be intimidating)"
     }
     val text: LiveData<String> = _text
 }

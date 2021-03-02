@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     var login_: String = ""
     var password_: String = ""
     var authManager: AuthManager = AuthManager()
-    var visitedSecond: Boolean = true
+    var visitedSecond: Boolean = false
 
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
