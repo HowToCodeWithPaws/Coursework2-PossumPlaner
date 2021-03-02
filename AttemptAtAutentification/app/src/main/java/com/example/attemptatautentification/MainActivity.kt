@@ -1,5 +1,6 @@
 package com.example.attemptatautentification
 
+import android.content.Intent
 import com.example.attemptatautentification.auth.AuthManager;
 
 import android.os.Bundle
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     var login_: String = ""
     var password_: String = ""
     var authManager: AuthManager = AuthManager()
+    var visitedSecond: Boolean = true
 
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     //Кнопочка зарегаться
     fun LogIn(view: View) {
+        visitedSecond = false
         //logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
         //signIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
@@ -49,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         } else if (!Validator.strongEnoughPassword(password_)) {
             updateUI("Пароль слишком слабый!")
         } else {
-
             authManager.createNewAccount(login_, password_)
 
             if (authManager.currentUser?.email.equals(login_)) {
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     //Кнопочка войти
     fun SignIn(view: View) {
+        visitedSecond = false
         login_ = login.text.toString()
         password_ = password.text.toString()
 
@@ -77,7 +80,13 @@ class MainActivity : AppCompatActivity() {
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             //todo Наташа
-            input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email).toString()
+            input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
+                .toString()
+            if (!visitedSecond) {
+                val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+                startActivity(randomIntent)
+                visitedSecond = true
+            }
         } else {
             updateUI("Нет пользователя")
         }

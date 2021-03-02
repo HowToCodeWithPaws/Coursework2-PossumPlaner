@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AttemptAtAutentification</string>
+    <string name="welcome_string">hello there, you come here often?</string>
+    <string name="title_activity_bottom_navigation_screen">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="screen_2">screen 2</string>
+    <string name="screen_1">screen 1</string>
+    <string name="screen_3">screen 3</string>
 </resources>
