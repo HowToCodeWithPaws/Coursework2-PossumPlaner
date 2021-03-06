@@ -1,13 +1,13 @@
-package com.example.attemptatautentification.ui.dashboard
+package com.example.attemptatautentification.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class SettingsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Because 7 8 9"
+        value = "(Because 7 is a prime number and prime numbers can be intimidating)"
     }
     val text: LiveData<String> = _text
 }

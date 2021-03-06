@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import com.example.attemptatautentification.auth.Validator
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_list.*
 import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -98,4 +99,5 @@ class MainActivity : AppCompatActivity() {
         input.text = warning
         input.refreshDrawableState()
     }
+
 }

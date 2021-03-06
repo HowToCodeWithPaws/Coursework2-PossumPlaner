@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/screen_1" />
+        android:id="@+id/navigation_list"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/list" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/screen_2" />
+        android:id="@+id/navigation_calendar"
+        android:icon="@android:drawable/ic_menu_month"
+        android:title="@string/calendar" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/screen_3" />
+        android:id="@+id/navigation_graph"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:title="@string/graphs" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/settings" />
 
 </menu>

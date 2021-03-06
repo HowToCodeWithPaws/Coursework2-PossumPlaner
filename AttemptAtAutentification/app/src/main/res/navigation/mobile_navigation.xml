@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_list">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.attemptatautentification.ui.home.HomeFragment"
-        android:label="Screen 1"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_list"
+        android:name="com.example.attemptatautentification.ui.list.ListFragment"
+        android:label="Список"
+        tools:layout="@layout/fragment_list" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.attemptatautentification.ui.dashboard.DashboardFragment"
-        android:label="Screen 2"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.attemptatautentification.ui.calendar.CalendarFragment"
+        android:label="Календарь"
+        tools:layout="@layout/fragment_calendar" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.attemptatautentification.ui.notifications.NotificationsFragment"
-        android:label="Screen 3"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_graph"
+        android:name="com.example.attemptatautentification.ui.graph.GraphFragment"
+        android:label="Графики"
+        tools:layout="@layout/fragment_graph" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.attemptatautentification.ui.settings.SettingsFragment"
+        android:label="Настройки"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

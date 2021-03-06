@@ -1,13 +1,13 @@
-package com.example.attemptatautentification.ui.notifications
+package com.example.attemptatautentification.ui.calendar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class CalendarViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "(Because 7 is a prime number and prime numbers can be intimidating)"
+        value = "Because 7 8 9"
     }
     val text: LiveData<String> = _text
 }

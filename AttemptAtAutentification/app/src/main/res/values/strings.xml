@@ -5,7 +5,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="screen_2">screen 2</string>
-    <string name="screen_1">screen 1</string>
-    <string name="screen_3">screen 3</string>
+    <string name="screen_2">Because 7 8 9</string>
+    <string name="screen_1">Why was 6 afraid of 7?</string>
+    <string name="screen_3">there may be cool visuals but there are not</string>
+    <string name="screen_3_5">(Because 7 is a prime number and prime numbers can be intimidating)</string>
+    <string name="plus">+</string>
+    <string name="calendar">Календарь</string>
+    <string name="settings">Настройки</string>
+    <string name="graphs">Графики</string>
+    <string name="list">Список</string>
 </resources>
