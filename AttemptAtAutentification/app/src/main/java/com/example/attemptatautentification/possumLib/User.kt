@@ -3,33 +3,33 @@ package com.example.attemptatautentification.possumLib
 import java.io.Serializable
 import java.util.ArrayList
 
-class User(name_:String/* = ""*/, token_: String /*= ""*/, plans_: ArrayList<Plan>/* = ArrayList()*/, categories_:ArrayList<Category> = ArrayList()):Serializable {
-     var name: String
+class User(name_: String = "new user", token_: String = "token", plans_: ArrayList<Plan> = ArrayList(), categories_: ArrayList<Category> = ArrayList()) : Serializable {
+    var name: String = "new user"
         get() {
-            return name
+            return field
         }
         set(value) {
             if (value.length in 1..9) {
-                name = value
+                field = value
             }
         }
 
-    private var token: String
+    private var token: String = "token"
         get() {
-            return token
+            return field
         }
         set(value) {
             if (value.length in 1..9) {
-                token = value
+                field = value
             }
         }
 
-     var plans: ArrayList<Plan>
+    var plans: ArrayList<Plan> = ArrayList()
         get() {
-            return plans
+            return field
         }
         set(value) {
-            plans = value
+            field = value
         }
 
     fun addPlan(plan: Plan) {
@@ -40,12 +40,12 @@ class User(name_:String/* = ""*/, token_: String /*= ""*/, plans_: ArrayList<Pla
         plans.remove(plan)
     }
 
-     var categories: ArrayList<Category>
+    var categories: ArrayList<Category> = ArrayList()
         get() {
-            return categories
+            return field
         }
         set(value) {
-            categories = value
+            field = value
         }
 
     fun addCategory(category: Category) {
@@ -57,9 +57,9 @@ class User(name_:String/* = ""*/, token_: String /*= ""*/, plans_: ArrayList<Pla
     }
 
     init {
-  //      name = name_
-    //    token = token_
-      //  plans = plans_
-       // categories = categories_
+        name = name_
+        token = token_
+        plans = plans_
+        categories = categories_
     }
 }

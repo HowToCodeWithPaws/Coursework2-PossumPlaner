@@ -11,8 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationScreen : AppCompatActivity() {
 
-  //  var new_user : User = User()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bottom_navigation_screen)
@@ -22,11 +20,13 @@ class BottomNavigationScreen : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
+        ///TODO PASS INFO TO FRAGMENTS
         val arguments = intent.extras
-        val new_user = arguments!!["user_deadlines"] as User
+        val new_user = arguments!!["user_with_deadlines"] as User
         var new_bundle =  Bundle()
-        new_bundle.putSerializable("user_deadlines", new_user)
+        new_bundle.putSerializable("user_with_deadlines", new_user)
 
+        print(new_user.name+"\n"+new_user.plans[0].title+"\n"+new_user.plans[1].title)
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(

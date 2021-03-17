@@ -1,6 +1,8 @@
 package com.example.attemptatautentification.possumLib
 
+import java.io.Serializable
 import java.util.*
+import kotlin.collections.ArrayList
 
 enum class possibleRepetitions {
     NONE, DAILY, WEEKLY, MONTHLY ///TODO рандомно на выбор пользователя
@@ -14,72 +16,73 @@ enum class possibleReminders {
     NONE, H3BEFORE, H12BEFORE, H24BEFORE, H72BEFORE
 }
 
-class Plan(title_: String/*, isFinished_: Boolean = false,
-           category_: Category, importance_: Int = 1,
+class Plan(title_: String = "new plan", isFinished_: Boolean = false,
+           category_: Category = Category(), importance_: Int = 1,
            subplans_: ArrayList<Subplan> = ArrayList(),
            repetition_: possibleRepetitions = possibleRepetitions.NONE,
            putOff_: possiblePutOffs = possiblePutOffs.NONE,
            reminder_: possibleReminders = possibleReminders.NONE,
            time_: Double = 0.0,
            deadline_: Date = java.util.Calendar.getInstance().time,
-           redline_: Date = java.util.Calendar.getInstance().time*/) {
+           redline_: Date = java.util.Calendar.getInstance().time): Serializable {
 
-     var isFinished: Boolean
+    var isFinished: Boolean = false
         get() {
-            return isFinished
+            return field
         }
         set(value) {
-            if (value == !isFinished) {
-                isFinished = value
+            if (value == !field) {
+                field = value
             }
         }
 
+    //??
     fun changeFinished() {
         isFinished = !isFinished
     }
 
-     var title: String
+    var title: String = "new plan"
         get() {
-            return title
+            return field
         }
         set(value) {
             if (value.length in 1..9) {
-                title = value
+                field = value
             }
         }
 
-     var category: Category
+    var category: Category = Category()
         get() {
-            return category
+            return field
         }
         set(value) {
-            category = value
+            field = value
         }
 
-     var importance: Int
+    var importance: Int = 1
         get() {
-            return importance
+            return field
         }
         set(value) {
             if (value in 0..4) {
-                importance = value
+                field = value
             }
         }
 
-     var repetition: possibleRepetitions
+    var repetition: possibleRepetitions = possibleRepetitions.NONE
         get() {
-            return repetition
+            return field
         }
         set(value) {
-            repetition = value
+            field = value
         }
 
-     var subplans: ArrayList<Subplan>
+    var subplans: ArrayList<Subplan> = ArrayList()
         get() {
-            return subplans
+            return field
         }
         set(value) {
-            subplans = value
+            field = value
         }
 
     fun addSubplan(subplan: Subplan) {
@@ -90,57 +93,57 @@ class Plan(title_: String/*, isFinished_: Boolean = false,
         subplans.remove(subplan)
     }
 
-     var putOff: possiblePutOffs
+    var putOff: possiblePutOffs = possiblePutOffs.NONE
         get() {
-            return putOff
+            return field
         }
         set(value) {
-            putOff = value
+            field = value
         }
 
-     var reminder: possibleReminders
+    var reminder: possibleReminders = possibleReminders.NONE
         get() {
-            return reminder
+            return field
         }
         set(value) {
-            reminder = value
+            field = value
         }
 
-     var time: Double
+    var time: Double = 0.0
         get() {
-            return time
+            return field
         }
         set(value) {
-            if (value >= 0) time = value
+            if (value >= 0) field = value
         }
 
-     var deadline: Date
+    var deadline: Date = java.util.Calendar.getInstance().time
         get() {
-            return deadline
+            return field
         }
         set(value) {
-            deadline = value
+            field = value
         }
 
-     var redline: Date
+    var redline: Date = java.util.Calendar.getInstance().time
         get() {
-            return redline
+            return field
         }
         set(value) {
-            redline = value
+            field = value
         }
 
     init {
-//        isFinished = isFinished_
+        isFinished = isFinished_
         title = title_
-//        importance = importance_
-//        category = category_
-//        repetition = repetition_
-//        subplans = subplans_
-//        putOff = putOff_
-//        time = time_
-//        deadline = deadline_
-//        redline = redline_
+        importance = importance_
+        category = category_
+        repetition = repetition_
+        subplans = subplans_
+        putOff = putOff_
+        time = time_
+        deadline = deadline_
+        redline = redline_
     }
 }
 

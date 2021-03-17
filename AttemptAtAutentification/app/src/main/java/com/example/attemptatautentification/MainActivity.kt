@@ -86,18 +86,20 @@ class MainActivity : AppCompatActivity() {
     //дефолтно обновляем интерфейс для юзера
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            //todo Наташа
 
-           ///experimental
-            val new_list :ArrayList<Plan> = arrayListOf<Plan>()
-            new_list.add(Plan("feels like dying"/*, false, Category("new category")*/))
-            var new_user : User = User("Dead", "token?", new_list)
+                ///TODO USER FROM SERVER
+            ///experimental
+            val category = Category("common")
+            val new_list: ArrayList<Plan> = arrayListOf<Plan>()
+            new_list.add(Plan("time to", false, Category("newting")))
+            val new_user: User = User("Dead", "token?", new_list)
+            new_user.plans.add(Plan("what", false, category, 2))
 
             input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
-                .toString()
+                    .toString()
             if (!visitedSecond) {
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
-                randomIntent.putExtra("user_deadlines", new_user)
+                randomIntent.putExtra("user_with_deadlines", new_user)
                 startActivity(randomIntent)
                 visitedSecond = true
             }

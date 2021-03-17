@@ -1,28 +1,32 @@
 package com.example.attemptatautentification.possumLib
 
-class Subplan(title_: String, isFinished_: Boolean = false) {
+import java.io.Serializable
 
-    private var isFinished: Boolean
+class Subplan(title_: String = "new subplan", isFinished_: Boolean = false) : Serializable {
+
+     var isFinished: Boolean = false
         get() {
-            return isFinished
+            return field
         }
         set(value) {
-            if (value == !isFinished) {
-                isFinished = value
+            if (value == !field) {
+                field = value
             }
         }
 
+
+    //??
     fun changeFinished() {
         isFinished = !isFinished
     }
 
-    private var title: String
+     var title: String = "new subplan"
         get() {
-            return title
+            return field
         }
         set(value) {
             if (value.length in 1..9) {
-                title = value
+                field = value
             }
         }
 
