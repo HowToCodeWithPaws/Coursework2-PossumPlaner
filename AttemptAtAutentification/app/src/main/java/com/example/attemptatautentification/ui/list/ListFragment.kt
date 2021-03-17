@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.attemptatautentification.R
+import com.example.attemptatautentification.possumLib.User
 import kotlinx.android.synthetic.main.fragment_list.*
-import java.lang.StringBuilder
 
 
 class ListFragment : Fragment() {
@@ -31,6 +28,15 @@ class ListFragment : Fragment() {
 //        listViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
+        if (arguments != null) {
+            val new_user: User = requireArguments().getSerializable("user_deadlines") as User
+            text_list.text =
+                StringBuilder(text_list.text).append("\n"+new_user.name+"\n"/*+new_user.plans[0].category.name*/+"\n"+new_user.plans[0].title+"\n").toString()
+        } else {
+            text_list.text =
+                StringBuilder().append("\ngot nothing!\n").toString()
+        }
 
         val button = root.findViewById<View>(R.id.addDeadlineList) as Button
         button.setOnClickListener {

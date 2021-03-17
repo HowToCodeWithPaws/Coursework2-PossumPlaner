@@ -1,6 +1,8 @@
 package com.example.attemptatautentification
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import com.example.attemptatautentification.auth.AuthManager;
 
 import android.os.Bundle
@@ -8,10 +10,14 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.attemptatautentification.auth.Validator
+import com.example.attemptatautentification.possumLib.Category
+import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.possumLib.User
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.lang.StringBuilder
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     var login_: String = ""
@@ -81,10 +87,17 @@ class MainActivity : AppCompatActivity() {
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             //todo Наташа
+
+           ///experimental
+            val new_list :ArrayList<Plan> = arrayListOf<Plan>()
+            new_list.add(Plan("feels like dying"/*, false, Category("new category")*/))
+            var new_user : User = User("Dead", "token?", new_list)
+
             input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
                 .toString()
             if (!visitedSecond) {
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+                randomIntent.putExtra("user_deadlines", new_user)
                 startActivity(randomIntent)
                 visitedSecond = true
             }
