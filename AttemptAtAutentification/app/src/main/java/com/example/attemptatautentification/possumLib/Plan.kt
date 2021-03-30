@@ -46,7 +46,7 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
             return field
         }
         set(value) {
-            if (value.length in 1..9) {
+            if (value.length in 1..19) {
                 field = value
             }
         }
@@ -132,6 +132,10 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
         set(value) {
             field = value
         }
+
+    override fun toString(): String {
+        return "category: "+category.name+"\n"+"importance"+importance.toString()+"\n"+"пока все";
+    }
 
     init {
         isFinished = isFinished_
