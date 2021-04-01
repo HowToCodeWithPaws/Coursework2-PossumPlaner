@@ -134,7 +134,7 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
         }
 
     override fun toString(): String {
-        return "category: "+category.name+"\n"+"importance"+importance.toString()+"\n"+"пока все";
+        return "category: "+category.name+"\n"+"importance "+importance.toString()+"\n"+"пока все";
     }
 
     init {
