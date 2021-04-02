@@ -14,4 +14,8 @@
     <string name="settings">Настройки</string>
     <string name="graphs">Графики</string>
     <string name="list">Список</string>
+    <string name="redline">redline:</string>
+    <string name="deadline">deadline:</string>
+    <string name="importance">importance:</string>
+    <string name="category">category:</string>
 </resources>

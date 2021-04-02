@@ -1,5 +1,6 @@
 package com.example.attemptatautentification.ui.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.attemptatautentification.BottomNavigationScreen
+import com.example.attemptatautentification.DeadlineEditActivity
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
@@ -17,6 +20,12 @@ var user: User = User()
 
 fun setNewUser(newUser: User) {
     user = newUser
+}
+
+var parentActivity : BottomNavigationScreen = BottomNavigationScreen()
+
+fun setParent(parent:BottomNavigationScreen){
+    parentActivity = parent
 }
 
 class ListFragment : Fragment() {
@@ -39,16 +48,21 @@ class ListFragment : Fragment() {
 
         val button = root.findViewById<View>(R.id.addDeadlineList) as Button
         button.setOnClickListener {
-            user.plans.add(
-                    //todo open deadline screen and add
-                    Plan(
-                            "plan${(user.plans.size + 1)}",
-                            false, Category("new"), 5
-                    )
+            var new_deadline :Plan =  Plan(
+                    "plan${(user.plans.size + 1)}",
+                    false, Category("new"), 5
             )
-            //    print("user's plans' length : ${user.plans.size}")
+            //todo save info from screen, make editable
+            openDeadlineScreen(new_deadline)
+            user.plans.add(new_deadline)
             adapter?.notifyDataSetChanged()
         }
         return root
+    }
+
+    fun openDeadlineScreen(deadline:Plan){
+        val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
+        intent.putExtra("deadline", deadline)
+       parentActivity.startActivity(intent)
     }
 }
