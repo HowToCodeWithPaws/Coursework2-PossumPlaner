@@ -7,13 +7,13 @@ import android.os.Parcelable
 import androidx.annotation.RequiresApi
 import java.io.Serializable
 
-class Category constructor(name_: String = "new category", colour_: Int = 0): Serializable/*, Parcelable*/ {
-     var name: String = "new category"
+class Category constructor(name_: String = "новая категория", colour_: Int = 0): Serializable/*, Parcelable*/ {
+     var name: String = "новая категория"
          get() {
             return field
         }
         set(value) {
-            if (value.length in 1..9) {
+            if (value.length in 1..19) {
                 field = value
             }
         }

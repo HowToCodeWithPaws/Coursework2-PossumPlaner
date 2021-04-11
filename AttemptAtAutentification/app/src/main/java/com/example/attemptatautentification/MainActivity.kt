@@ -7,6 +7,7 @@ import com.example.attemptatautentification.auth.AuthManager;
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.attemptatautentification.auth.Validator
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //при запуске приложеньки
+    @RequiresApi(Build.VERSION_CODES.O)
     public override fun onStart() {
         super.onStart()
         // если ты уже зареган то обнови это в интерфейсе
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Кнопочка зарегаться
+    @RequiresApi(Build.VERSION_CODES.O)
     fun LogIn(view: View) {
         visitedSecond = false
         //logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
@@ -70,6 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Кнопочка войти
+    @RequiresApi(Build.VERSION_CODES.O)
     fun SignIn(view: View) {
         visitedSecond = false
         login_ = login.text.toString()
@@ -84,6 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //дефолтно обновляем интерфейс для юзера
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateUI(user: FirebaseUser?) {
         if (user != null) {
 

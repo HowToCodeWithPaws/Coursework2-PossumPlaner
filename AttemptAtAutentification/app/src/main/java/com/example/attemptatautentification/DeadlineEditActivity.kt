@@ -1,31 +1,44 @@
 package com.example.attemptatautentification
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.navigation.findNavController
-import com.example.attemptatautentification.auth.AuthManager
+import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
-import com.example.attemptatautentification.possumLib.User
-import com.example.attemptatautentification.ui.list.setNewUser
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.common.io.Files.append
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
-import kotlinx.android.synthetic.main.activity_main.*
+import java.time.LocalDate
+
+@RequiresApi(Build.VERSION_CODES.O)
+var deadlineToEdit: Plan = Plan()
 
 class DeadlineEditActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deadline_edit_screen)
 
-        val arguments = intent.extras
-        val deadline = arguments!!["deadline"] as Plan
-        deadline_title.text = deadline.title
-        deadline_category.text = StringBuilder(deadline_category.text).append(deadline.category.name)
-        deadline_importance.text = StringBuilder(deadline_importance.text).append(deadline.importance.toString())
-        deadline_deadline.text = StringBuilder(deadline_deadline.text).append(deadline.deadline.toString()).toString()
-        deadline_redline.text = StringBuilder(deadline_redline.text).append(deadline.redline.toString()).toString()
+   //     val arguments = intent.extras
+   //     deadline = arguments!!["deadline"] as Plan
+        deadline_title.setText(deadlineToEdit.title)
+        deadline_category.setText(deadlineToEdit.category.name)
+        deadline_importance.setText(deadlineToEdit.importance.toString())
+        deadline_deadline.setText(deadlineToEdit.deadline.toString())
+        deadline_redline.setText(deadlineToEdit.redline.toString())
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun save(view: View) {
+        deadlineToEdit.title = deadline_title.text.toString()
+        deadlineToEdit.category = Category(deadline_category.text.toString())
+        deadlineToEdit.importance = deadline_importance.text.toString().toInt()
+        deadlineToEdit.deadline = LocalDate.parse(deadline_deadline.text.toString())
+        deadlineToEdit.redline = LocalDate.parse(deadline_redline.text.toString())
+        this.finish()
     }
 }

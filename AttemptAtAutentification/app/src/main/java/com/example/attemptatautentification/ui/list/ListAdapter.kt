@@ -1,5 +1,6 @@
 package com.example.attemptatautentification.ui.list
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.attemptatautentification.DeadlineEditActivity
 import com.example.attemptatautentification.R
+import com.example.attemptatautentification.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
 import java.util.ArrayList
 
@@ -38,9 +41,10 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         init {
             itemView.setOnClickListener {
                 Toast.makeText(
+                    //openDeadlineScreenEdit(itemView.) todo find how to get the deadline from focus
                         itemView.context,
                         name.text,
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_LONG
                 ).show()
             }
         }
@@ -51,6 +55,13 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
      //       ivPoster.setImageResource(deadline.picture)
         }
 
+
+        fun openDeadlineScreenEdit(deadline:Plan){
+            deadlineToEdit = deadline
+            val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
+            intent.putExtra("deadline", deadline)
+            parentActivity.startActivity(intent)
+        }
     }
 
 

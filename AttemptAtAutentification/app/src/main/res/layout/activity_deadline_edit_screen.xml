@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <EditText
         android:id="@+id/deadline_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -14,6 +15,7 @@
         android:textStyle="bold"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:hint="@string/title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,16 +23,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
-    <TextView
+    <EditText
         android:id="@+id/deadline_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="@string/category"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:ellipsize="end"
+        android:hint="@string/category"
+        android:text="@string/category"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -38,16 +41,16 @@
         app:layout_constraintTop_toBottomOf="@id/deadline_title"
         app:layout_constraintVertical_bias="0.037" />
 
-    <TextView
+    <EditText
         android:id="@+id/deadline_importance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="@string/importance"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:ellipsize="end"
+        android:hint="@string/importance"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -55,16 +58,16 @@
         app:layout_constraintTop_toBottomOf="@id/deadline_category"
         app:layout_constraintVertical_bias="0.033" />
 
-    <TextView
+    <EditText
         android:id="@+id/deadline_deadline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="@string/deadline"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:ellipsize="end"
+        android:hint="@string/deadline"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -72,21 +75,34 @@
         app:layout_constraintTop_toBottomOf="@id/deadline_importance"
         app:layout_constraintVertical_bias="0.025" />
 
-    <TextView
+    <EditText
         android:id="@+id/deadline_redline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="@string/redline"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:ellipsize="end"
+        android:hint="@string/redline"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/deadline_deadline"
         app:layout_constraintVertical_bias="0.036" />
+
+    <Button
+        android:id="@+id/deadline_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:onClick="save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.856" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

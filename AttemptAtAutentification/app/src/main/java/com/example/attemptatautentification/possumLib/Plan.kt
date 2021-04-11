@@ -1,6 +1,9 @@
 package com.example.attemptatautentification.possumLib
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.io.Serializable
+import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -16,15 +19,15 @@ enum class possibleReminders {
     NONE, H3BEFORE, H12BEFORE, H24BEFORE, H72BEFORE
 }
 
-class Plan(title_: String = "new plan", isFinished_: Boolean = false,
-           category_: Category = Category(), importance_: Int = 1,
-           subplans_: ArrayList<Subplan> = ArrayList(),
-           repetition_: possibleRepetitions = possibleRepetitions.NONE,
-           putOff_: possiblePutOffs = possiblePutOffs.NONE,
-           reminder_: possibleReminders = possibleReminders.NONE,
-           time_: Double = 0.0,
-           deadline_: Date = java.util.Calendar.getInstance().time,
-           redline_: Date = java.util.Calendar.getInstance().time): Serializable {
+class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "новый план", isFinished_: Boolean = false,
+                                                           category_: Category = Category(), importance_: Int = 1,
+                                                           subplans_: ArrayList<Subplan> = ArrayList(),
+                                                           repetition_: possibleRepetitions = possibleRepetitions.NONE,
+                                                           putOff_: possiblePutOffs = possiblePutOffs.NONE,
+                                                           reminder_: possibleReminders = possibleReminders.NONE,
+                                                           time_: Double = 0.0,
+                                                           deadline_: LocalDate =LocalDate.now(),
+                                                           redline_:LocalDate = LocalDate.now()): Serializable {
 
     var isFinished: Boolean = false
         get() {
@@ -41,7 +44,7 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
         isFinished = !isFinished
     }
 
-    var title: String = "new plan"
+    var title: String = "новый план"
         get() {
             return field
         }
@@ -117,7 +120,7 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
             if (value >= 0) field = value
         }
 
-    var deadline: Date = java.util.Calendar.getInstance().time
+    var deadline: LocalDate = LocalDate.now()
         get() {
             return field
         }
@@ -125,7 +128,7 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
             field = value
         }
 
-    var redline: Date = java.util.Calendar.getInstance().time
+    var redline: LocalDate = LocalDate.now()
         get() {
             return field
         }
@@ -134,7 +137,7 @@ class Plan(title_: String = "new plan", isFinished_: Boolean = false,
         }
 
     override fun toString(): String {
-        return "category: "+category.name+"\n"+"importance "+importance.toString()+"\n"+"пока все";
+        return "category: "+category.name+"\n"+"importance "+importance.toString()+"\ndeadline: "+deadline.toString()+"\nredline: "+redline.toString();
     }
 
     init {
