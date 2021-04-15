@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.BottomNavigationScreen
@@ -26,9 +28,9 @@ fun setNewUser(newUser: User) {
     user = newUser
 }
 
-var parentActivity : BottomNavigationScreen = BottomNavigationScreen()
+var parentActivity: BottomNavigationScreen = BottomNavigationScreen()
 
-fun setParent(parent:BottomNavigationScreen){
+fun setParent(parent: BottomNavigationScreen) {
     parentActivity = parent
 }
 
@@ -51,23 +53,32 @@ class ListFragment : Fragment() {
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
 
+        val divide: DividerItemDecoration = DividerItemDecoration(rvDeadlineList.context, DividerItemDecoration.HORIZONTAL)
+
+        val mDivider  = this.context?.let { ContextCompat.getDrawable(it, R.drawable.divider_drawable) };
+        if (mDivider != null) {
+            divide.setDrawable(mDivider)
+        };
+
+
+        rvDeadlineList.addItemDecoration(divide)
         val button = root.findViewById<View>(R.id.addDeadlineList) as Button
         button.setOnClickListener {
-            var new_deadline :Plan =  Plan()
+            var new_deadline: Plan = Plan()
             //todo refresh
             openDeadlineScreen(new_deadline)
             adapter?.notifyDataSetChanged()
             user.plans.add(new_deadline)
-        //    adapter.refreshDrawableState()
+            //    adapter.refreshDrawableState()
             adapter?.notifyDataSetChanged()
         }
         return root
     }
 
-    fun openDeadlineScreen(deadline:Plan){
+    fun openDeadlineScreen(deadline: Plan) {
         deadlineToEdit = deadline
         val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
         intent.putExtra("deadline", deadline)
-       parentActivity.startActivity(intent)
+        parentActivity.startActivity(intent)
     }
 }

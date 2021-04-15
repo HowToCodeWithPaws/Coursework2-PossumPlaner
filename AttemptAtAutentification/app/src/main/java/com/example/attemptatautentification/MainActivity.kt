@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity() {
             val new_list: ArrayList<Plan> = arrayListOf<Plan>()
             new_list.add(Plan("time to", false, Category("newting")))
             val new_user: User = User("Dead", "token?", new_list)
-            new_user.plans.add(Plan("what", false, category, 2))
-            new_user.plans.add(Plan("test actually!", false, category, 3))
+            new_user.plans.add(Plan("what", false, category, "test",2))
+            new_user.plans.add(Plan("test actually!", false, category, "another test",3))
 
 
             input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)

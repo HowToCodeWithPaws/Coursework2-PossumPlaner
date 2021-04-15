@@ -20,14 +20,14 @@ enum class possibleReminders {
 }
 
 class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "новый план", isFinished_: Boolean = false,
-                                                           category_: Category = Category(), importance_: Int = 1,
+                                                           category_: Category = Category(), notes_: String = "", importance_: Int = 1,
                                                            subplans_: ArrayList<Subplan> = ArrayList(),
                                                            repetition_: possibleRepetitions = possibleRepetitions.NONE,
                                                            putOff_: possiblePutOffs = possiblePutOffs.NONE,
                                                            reminder_: possibleReminders = possibleReminders.NONE,
                                                            time_: Double = 0.0,
-                                                           deadline_: LocalDate =LocalDate.now(),
-                                                           redline_:LocalDate = LocalDate.now()): Serializable {
+                                                           deadline_: LocalDate = LocalDate.now(),
+                                                           redline_: LocalDate = LocalDate.now()) : Serializable {
 
     var isFinished: Boolean = false
         get() {
@@ -136,13 +136,22 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
             field = value
         }
 
+    var notes: String = ""
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
+
     override fun toString(): String {
-        return "category: "+category.name+"\n"+"importance "+importance.toString()+"\ndeadline: "+deadline.toString()+"\nredline: "+redline.toString();
+        return "category: " + category.name + "\n" + "importance " + importance.toString() + "\ndeadline: " + deadline.toString() + "\nredline: " + redline.toString();
     }
 
     init {
         isFinished = isFinished_
         title = title_
+        notes = notes_
         importance = importance_
         category = category_
         repetition = repetition_
