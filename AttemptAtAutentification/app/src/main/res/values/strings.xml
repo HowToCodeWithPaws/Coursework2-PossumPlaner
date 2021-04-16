@@ -17,7 +17,13 @@
     <string name="redline">редлайн</string>
     <string name="deadline">дедлайн</string>
     <string name="importance">важность</string>
-    <string name="category">название</string>
+    <string name="category">категория</string>
     <string name="save">Сохранить</string>
     <string name="title">название</string>
+    <string name="password">пароль</string>
+    <string name="username">имя пользователя</string>
+    <string name="sign_in">войти в аккаунт</string>
+    <string name="log_in">зарегистрироваться</string>
+    <string name="notes">описание</string>
+    <string name="importance_caption">важность</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.attemptatautentification.ui.list
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -44,11 +45,10 @@ class ListFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        //    print("HERE" + user.name + "\n" + user.plans[0].title + "\n" + user.plans[1].title)
 
         val root = inflater.inflate(R.layout.fragment_list, container, false)
 
-        val rvDeadlineList: RecyclerView = root.findViewById<RecyclerView>(R.id.hello_activity__rv_movie_list)
+        val rvDeadlineList: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_list)
         adapter = ListAdapter(user.plans)
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
@@ -69,7 +69,7 @@ class ListFragment : Fragment() {
             openDeadlineScreen(new_deadline)
             adapter?.notifyDataSetChanged()
             user.plans.add(new_deadline)
-            //    adapter.refreshDrawableState()
+           //     adapter.refreshDrawableState()
             adapter?.notifyDataSetChanged()
         }
         return root
@@ -81,4 +81,5 @@ class ListFragment : Fragment() {
         intent.putExtra("deadline", deadline)
         parentActivity.startActivity(intent)
     }
+
 }

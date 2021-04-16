@@ -67,7 +67,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
             return field
         }
         set(value) {
-            if (value in 0..4) {
+            if (value in 0..5) {
                 field = value
             }
         }
