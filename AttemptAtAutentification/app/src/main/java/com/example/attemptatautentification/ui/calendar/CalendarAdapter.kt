@@ -1,11 +1,13 @@
-package com.example.attemptatautentification.ui.list
+package com.example.attemptatautentification.ui.calendar
 
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.RatingBar
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.DeadlineEditActivity
@@ -15,15 +17,15 @@ import com.example.attemptatautentification.possumLib.Plan
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ListAdapter(private val deadlines: ArrayList<Plan>) :
-        RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
+        RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
-        return ListViewHolder(view)
+        return CalendarViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
@@ -32,11 +34,11 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         return deadlines.size
     }
 
-     fun getItem(position: Int): Plan {
-        return deadlines[position];
+    fun getItem(position: Int): Plan {
+        return deadlines[position]
     }
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
         private val name: TextView = itemView.findViewById(R.id.name)
@@ -45,7 +47,6 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         private val date: TextView = itemView.findViewById(R.id.date)
         private val deadline: TextView = itemView.findViewById(R.id.deadline)
         private val check: CheckBox = itemView.findViewById(R.id.checkBox)
-
 
 
         @RequiresApi(Build.VERSION_CODES.O)

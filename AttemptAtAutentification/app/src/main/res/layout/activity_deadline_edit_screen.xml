@@ -77,7 +77,7 @@
         app:layout_constraintVertical_bias="0.025" />
 
     <EditText
-        android:id="@+id/deadline_redline"
+        android:id="@+id/deadline_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -87,7 +87,7 @@
         android:ellipsize="end"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:hint="@string/redline"
+        android:hint="@string/date"
         android:inputType="none"
         android:textColor="#EC407A"
         android:textSize="16sp"

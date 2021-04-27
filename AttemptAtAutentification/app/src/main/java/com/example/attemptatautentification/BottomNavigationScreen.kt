@@ -29,6 +29,8 @@ class BottomNavigationScreen : AppCompatActivity() {
         //     print(new_user.name + "\n" + new_user.plans[0].title + "\n" + new_user.plans[1].title)
         setNewUser(new_user)
         setParent(this)
+        com.example.attemptatautentification.ui.calendar.setNewUser(new_user)
+        com.example.attemptatautentification.ui.calendar.setParent(this)
         val appBarConfiguration = AppBarConfiguration(
                 setOf(
                         R.id.navigation_list,

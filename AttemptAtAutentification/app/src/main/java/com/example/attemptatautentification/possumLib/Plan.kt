@@ -26,8 +26,8 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
                                                            putOff_: possiblePutOffs = possiblePutOffs.NONE,
                                                            reminder_: possibleReminders = possibleReminders.NONE,
                                                            time_: Double = 0.0,
-                                                           deadline_: LocalDate = LocalDate.now(),
-                                                           redline_: LocalDate = LocalDate.now()) : Serializable {
+                                                           date_: LocalDate = LocalDate.now(),
+                                                           deadline_: LocalDate = LocalDate.now()) : Serializable {
 
     var isFinished: Boolean = false
         get() {
@@ -120,6 +120,14 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
             if (value >= 0) field = value
         }
 
+    var date: LocalDate = LocalDate.now()
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
+        }
+
     var deadline: LocalDate = LocalDate.now()
         get() {
             return field
@@ -128,13 +136,6 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
             field = value
         }
 
-    var redline: LocalDate = LocalDate.now()
-        get() {
-            return field
-        }
-        set(value) {
-            field = value
-        }
 
     var notes: String = ""
         get() {
@@ -145,7 +146,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
         }
 
     override fun toString(): String {
-        return "category: " + category.name + "\n" + "importance " + importance.toString() + "\ndeadline: " + deadline.toString() + "\nredline: " + redline.toString();
+        return "category: " + category.name + "\n" + "importance " + importance.toString() + "\ndate: " + date.toString()+ "\ndeadline: " + deadline.toString() ;
     }
 
     init {
@@ -158,8 +159,8 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
         subplans = subplans_
         putOff = putOff_
         time = time_
+        date = date_
         deadline = deadline_
-        redline = redline_
     }
 }
 

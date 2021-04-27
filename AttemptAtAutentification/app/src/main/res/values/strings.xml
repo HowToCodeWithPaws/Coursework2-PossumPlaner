@@ -26,4 +26,5 @@
     <string name="log_in">зарегистрироваться</string>
     <string name="notes">описание</string>
     <string name="importance_caption">важность</string>
+    <string name="date">дата</string>
 </resources>
