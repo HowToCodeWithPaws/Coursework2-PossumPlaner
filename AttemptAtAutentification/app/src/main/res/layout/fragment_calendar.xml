@@ -49,13 +49,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_calendar"
         android:layout_width="match_parent"
+        android:layout_height="360dp"
         android:paddingBottom="?actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/calendarView"
         app:layout_constraintTop_toBottomOf="@id/calendarView"
-        app:layout_constraintVertical_bias="0.606"
-        android:layout_height="400dp" />
+        app:layout_constraintVertical_bias="0.606" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

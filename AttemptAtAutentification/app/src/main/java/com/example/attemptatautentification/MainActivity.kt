@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.lang.StringBuilder
+import java.time.LocalDate
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             val new_list: ArrayList<Plan> = arrayListOf<Plan>()
             new_list.add(Plan("time to", false, Category("newting")))
             val new_user: User = User("Dead", "token?", new_list)
-            new_user.plans.add(Plan("what", false, category, "test",2))
+            new_user.plans.add(Plan("what", false, category, "test",2, LocalDate.of(2000,2,2), LocalDate.of(2021, 5, 4)))
             new_user.plans.add(Plan("test actually!", false, category, "another test",3))
 
 

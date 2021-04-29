@@ -35,12 +35,19 @@ class DeadlineEditActivity : AppCompatActivity() {
         deadline_title.setText(deadlineToEdit.title)
         deadline_category.setText(deadlineToEdit.category.name)
         deadline_notes.setText(deadlineToEdit.notes)
-        deadline_deadline.setText(deadlineToEdit.deadline.toString())
-        deadline_date.setText(deadlineToEdit.date.toString())
+//        deadline_deadline.setText(deadlineToEdit.deadline.toString())
+  //      deadline_date.setText(deadlineToEdit.date.toString())
         deadline_finished.isChecked = deadlineToEdit.isFinished
 
-        deadline_deadline.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis()))
-        deadline_date.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis()))
+        var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        var formattedDate = deadlineToEdit.date.format(formatter)
+        var formattedDeadline = deadlineToEdit.deadline.format(formatter)
+        deadline_deadline.setText(formattedDeadline)
+              deadline_date.setText(formattedDate)
+
+
+   //     deadline_deadline.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(deadlineToEdit.deadline))
+   //     deadline_date.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(deadlineToEdit.date))
 
         var calDed = Calendar.getInstance()
         var calDate = Calendar.getInstance()

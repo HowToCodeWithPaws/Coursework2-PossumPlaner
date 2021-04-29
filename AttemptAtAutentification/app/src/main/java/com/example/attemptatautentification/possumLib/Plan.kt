@@ -21,13 +21,13 @@ enum class possibleReminders {
 
 class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "новый план", isFinished_: Boolean = false,
                                                            category_: Category = Category(), notes_: String = "", importance_: Int = 1,
+                                                           date_: LocalDate = LocalDate.now(),
+                                                           deadline_: LocalDate = LocalDate.now(),
                                                            subplans_: ArrayList<Subplan> = ArrayList(),
                                                            repetition_: possibleRepetitions = possibleRepetitions.NONE,
                                                            putOff_: possiblePutOffs = possiblePutOffs.NONE,
                                                            reminder_: possibleReminders = possibleReminders.NONE,
-                                                           time_: Double = 0.0,
-                                                           date_: LocalDate = LocalDate.now(),
-                                                           deadline_: LocalDate = LocalDate.now()) : Serializable {
+                                                           time_: Double = 0.0) : Serializable {
 
     var isFinished: Boolean = false
         get() {
@@ -156,6 +156,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         importance = importance_
         category = category_
         repetition = repetition_
+        reminder = reminder_
         subplans = subplans_
         putOff = putOff_
         time = time_

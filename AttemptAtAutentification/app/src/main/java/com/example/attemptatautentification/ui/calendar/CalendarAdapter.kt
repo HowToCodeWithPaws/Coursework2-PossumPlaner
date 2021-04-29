@@ -15,6 +15,7 @@ import com.example.attemptatautentification.R
 import com.example.attemptatautentification.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
@@ -25,6 +26,7 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
         return CalendarViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -58,6 +60,7 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(deadlineItem: Plan) {
             plan = deadlineItem
             category.text = deadlineItem.category.name
@@ -68,8 +71,10 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
             rating.rating = deadlineItem.importance.toFloat()
             check.isChecked = deadlineItem.isFinished // todo удаление из списка?
             check.setOnClickListener({deadlineItem.isFinished = check.isChecked})
-            date.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis()))
-            deadline.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis()))
+            var formattedDate = deadlineItem.date.format( DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            var formattedDeadline = deadlineItem.deadline.format( DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            deadline.text = formattedDeadline
+            date.text = formattedDate
         }
 
 

@@ -12,17 +12,21 @@ import com.example.attemptatautentification.DeadlineEditActivity
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
+import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ListAdapter(private val deadlines: ArrayList<Plan>) :
-        RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
         return ListViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -32,7 +36,7 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         return deadlines.size
     }
 
-     fun getItem(position: Int): Plan {
+    fun getItem(position: Int): Plan {
         return deadlines[position];
     }
 
@@ -47,7 +51,6 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         private val check: CheckBox = itemView.findViewById(R.id.checkBox)
 
 
-
         @RequiresApi(Build.VERSION_CODES.O)
         var plan: Plan = Plan()
 
@@ -57,6 +60,7 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(deadlineItem: Plan) {
             plan = deadlineItem
             category.text = deadlineItem.category.name
@@ -66,9 +70,13 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
             deadline.text = deadlineItem.deadline.toString()
             rating.rating = deadlineItem.importance.toFloat()
             check.isChecked = deadlineItem.isFinished // todo удаление из списка?
-            check.setOnClickListener({deadlineItem.isFinished = check.isChecked})
-            date.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis()))
-            deadline.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis()))
+            check.setOnClickListener({ deadlineItem.isFinished = check.isChecked })
+
+            var formattedDate = deadlineItem.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            var formattedDeadline =
+                deadlineItem.deadline.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            deadline.text = formattedDeadline
+            date.text = formattedDate
         }
 
 
@@ -80,6 +88,6 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         }
     }
 
-    fun changeFinished(view: View){}
+    fun changeFinished(view: View) {}
 
 }

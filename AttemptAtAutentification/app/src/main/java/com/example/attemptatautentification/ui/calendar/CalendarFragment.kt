@@ -27,7 +27,12 @@ import com.example.attemptatautentification.ui.list.ListAdapter
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.lang.StringBuilder
-import java.util.ArrayList
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 var user: User = User()
 
@@ -38,7 +43,7 @@ fun setNewUser(newUser: User) {
 var parentActivity: BottomNavigationScreen = BottomNavigationScreen()
 
 fun setParent(parent: BottomNavigationScreen) {
- parentActivity = parent
+    parentActivity = parent
 }
 
 class CalendarFragment : Fragment() {
@@ -52,24 +57,37 @@ class CalendarFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_calendar, container, false)
 
-        val calendarView = root.findViewById<View>(R.id.calendarView) as CalendarView
-
         val rvDeadlineList: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_list_calendar)
+        val calendarView = root.findViewById<View>(R.id.calendarView) as CalendarView
+        val calendar = Calendar.getInstance()
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            // set the calendar date as calendar view selected date
+            calendar.set(year, month, dayOfMonth)
 
-        ///todo тут????
-     adapter = CalendarAdapter(user.plans.filter { it.date.equals(calendarView.date)} as ArrayList<Plan>)
+            // set this date as calendar view selected date
+            calendarView.date = calendar.timeInMillis
+            refresh(rvDeadlineList, calendar)
+        }
 
-        rvDeadlineList.adapter = adapter
-        rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
+        refresh(rvDeadlineList, calendar)
+//        ///todo тут????
+//        adapter =
+//            CalendarAdapter(user.plans.filter { it.date.equals(calendarView.date) } as ArrayList<Plan>)
+//
+//        rvDeadlineList.adapter = adapter
+//        rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
 
-        val divide: DividerItemDecoration = DividerItemDecoration(rvDeadlineList.context, DividerItemDecoration.HORIZONTAL)
+        val divide: DividerItemDecoration =
+            DividerItemDecoration(rvDeadlineList.context, DividerItemDecoration.HORIZONTAL)
 
-        val mDivider  = this.context?.let { ContextCompat.getDrawable(it, R.drawable.divider_drawable) };
+        val mDivider =
+            this.context?.let { ContextCompat.getDrawable(it, R.drawable.divider_drawable) };
         if (mDivider != null) {
             divide.setDrawable(mDivider)
         };
 
         rvDeadlineList.addItemDecoration(divide)
+
         val button = root.findViewById<View>(R.id.addDeadlineCalendar) as Button
         button.setOnClickListener {
             var new_deadline: Plan = Plan()
@@ -90,5 +108,14 @@ class CalendarFragment : Fragment() {
         parentActivity.startActivity(intent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun refresh(rvDeadlineList :RecyclerView, calendar: Calendar) {
+        var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+
+        adapter = CalendarAdapter(user.plans.filter { it.date.equals(ldate) } as ArrayList<Plan>)
+
+        rvDeadlineList.adapter = adapter
+        rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
+    }
 
 }
