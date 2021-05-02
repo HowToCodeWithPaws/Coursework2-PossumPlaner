@@ -12,10 +12,9 @@
         <activity android:name=".BottomNavigationScreen"
             android:label="BottomNavigationActivity">
         </activity>
-        <activity android:name=".DeadlineEditActivity"
+        <activity android:name="com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity"
             android:label="DeadlineEditActivity">
         </activity>
-        <activity android:name=".SecondScreen" />
         <activity android:name=".MainActivity"
             android:label="mainActivity">
             <intent-filter>

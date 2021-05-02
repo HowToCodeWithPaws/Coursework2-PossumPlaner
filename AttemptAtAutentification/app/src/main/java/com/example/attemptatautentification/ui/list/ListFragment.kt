@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.BottomNavigationScreen
-import com.example.attemptatautentification.DeadlineEditActivity
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.R
-import com.example.attemptatautentification.deadlineToEdit
+import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.User

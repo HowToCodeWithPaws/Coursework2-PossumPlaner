@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.attemptatautentification.DeadlineEditActivity
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.R
-import com.example.attemptatautentification.deadlineToEdit
+import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import java.text.SimpleDateFormat

@@ -14,18 +14,12 @@ class Subplan(title_: String = "new subplan", isFinished_: Boolean = false) : Se
             }
         }
 
-
-    //??
-    fun changeFinished() {
-        isFinished = !isFinished
-    }
-
      var title: String = "new subplan"
         get() {
             return field
         }
         set(value) {
-            if (value.length in 1..9) {
+            if (value.length in 1..19) {
                 field = value
             }
         }

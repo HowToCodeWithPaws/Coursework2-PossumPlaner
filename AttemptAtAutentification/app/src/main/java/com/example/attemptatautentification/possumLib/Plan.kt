@@ -86,6 +86,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
         }
         set(value) {
             field = value
+            println("subs "+subplans.size)
         }
 
     fun addSubplan(subplan: Subplan) {
@@ -158,6 +159,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
         repetition = repetition_
         reminder = reminder_
         subplans = subplans_
+        println("subs "+subplans.size)
         putOff = putOff_
         time = time_
         date = date_

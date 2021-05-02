@@ -18,11 +18,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.BottomNavigationScreen
-import com.example.attemptatautentification.DeadlineEditActivity
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.R
-import com.example.attemptatautentification.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.User
+import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.ui.list.ListAdapter
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -61,21 +61,12 @@ class CalendarFragment : Fragment() {
         val calendarView = root.findViewById<View>(R.id.calendarView) as CalendarView
         val calendar = Calendar.getInstance()
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // set the calendar date as calendar view selected date
             calendar.set(year, month, dayOfMonth)
-
-            // set this date as calendar view selected date
             calendarView.date = calendar.timeInMillis
             refresh(rvDeadlineList, calendar)
         }
 
         refresh(rvDeadlineList, calendar)
-//        ///todo тут????
-//        adapter =
-//            CalendarAdapter(user.plans.filter { it.date.equals(calendarView.date) } as ArrayList<Plan>)
-//
-//        rvDeadlineList.adapter = adapter
-//        rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
 
         val divide: DividerItemDecoration =
             DividerItemDecoration(rvDeadlineList.context, DividerItemDecoration.HORIZONTAL)
@@ -91,6 +82,8 @@ class CalendarFragment : Fragment() {
         val button = root.findViewById<View>(R.id.addDeadlineCalendar) as Button
         button.setOnClickListener {
             var new_deadline: Plan = Plan()
+            var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+            new_deadline.date = ldate
             //todo refresh
             openDeadlineScreen(new_deadline)
             adapter?.notifyDataSetChanged()

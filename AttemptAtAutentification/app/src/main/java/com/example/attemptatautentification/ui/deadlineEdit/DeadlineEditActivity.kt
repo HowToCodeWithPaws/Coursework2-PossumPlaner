@@ -1,4 +1,4 @@
-package com.example.attemptatautentification
+package com.example.attemptatautentification.ui.deadlineEdit
 
 import android.app.DatePickerDialog
 import android.content.DialogInterface
@@ -9,13 +9,19 @@ import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.ui.calendar.CalendarAdapter
+import com.example.attemptatautentification.ui.calendar.user
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import kotlinx.android.synthetic.main.deadline_item.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -23,20 +29,18 @@ import java.util.*
 var deadlineToEdit: Plan = Plan()
 
 class DeadlineEditActivity : AppCompatActivity() {
+
+    var adapter: DeadlineEditAdapter? = null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deadline_edit_screen)
-
-   //     val arguments = intent.extras
-   //     deadline = arguments!!["deadline"] as Plan
         deadline_importance.rating = deadlineToEdit.importance.toFloat()
         deadline_title.setText(deadlineToEdit.title)
         deadline_category.setText(deadlineToEdit.category.name)
         deadline_notes.setText(deadlineToEdit.notes)
-//        deadline_deadline.setText(deadlineToEdit.deadline.toString())
-  //      deadline_date.setText(deadlineToEdit.date.toString())
         deadline_finished.isChecked = deadlineToEdit.isFinished
 
         var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
@@ -44,11 +48,6 @@ class DeadlineEditActivity : AppCompatActivity() {
         var formattedDeadline = deadlineToEdit.deadline.format(formatter)
         deadline_deadline.setText(formattedDeadline)
               deadline_date.setText(formattedDate)
-
-
-   //     deadline_deadline.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(deadlineToEdit.deadline))
-   //     deadline_date.setText(SimpleDateFormat("dd.MM.yyyy", Locale.US).format(deadlineToEdit.date))
-
         var calDed = Calendar.getInstance()
         var calDate = Calendar.getInstance()
 
@@ -85,6 +84,15 @@ class DeadlineEditActivity : AppCompatActivity() {
                     calDate.get(Calendar.MONTH),
                     calDate.get(Calendar.DAY_OF_MONTH)).show()
         }
+
+        refresh(rv_subplans)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun refresh(rvDeadlineList :RecyclerView) {
+        adapter = DeadlineEditAdapter(deadlineToEdit.subplans)
+        rvDeadlineList.adapter = adapter
+        rvDeadlineList.layoutManager = LinearLayoutManager(this.applicationContext)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

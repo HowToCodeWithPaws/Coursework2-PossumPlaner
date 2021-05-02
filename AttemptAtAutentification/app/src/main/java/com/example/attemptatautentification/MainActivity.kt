@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import com.example.attemptatautentification.auth.Validator
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.possumLib.Subplan
 import com.example.attemptatautentification.possumLib.User
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
@@ -95,10 +96,15 @@ class MainActivity : AppCompatActivity() {
 
                 ///TODO USER FROM SERVER
             val category = Category("common")
+            val subplan = Subplan("s1")
+            val subplan2 = Subplan("s2")
+            val slist :ArrayList<Subplan> = arrayListOf<Subplan>()
+            slist.add(subplan)
+            slist.add(subplan2)
             val new_list: ArrayList<Plan> = arrayListOf<Plan>()
             new_list.add(Plan("time to", false, Category("newting")))
             val new_user: User = User("Dead", "token?", new_list)
-            new_user.plans.add(Plan("what", false, category, "test",2, LocalDate.of(2000,2,2), LocalDate.of(2021, 5, 4)))
+            new_user.plans.add(Plan("what", false, category, "test",2, LocalDate.of(2000,2,2), LocalDate.of(2021, 5, 4), slist))
             new_user.plans.add(Plan("test actually!", false, category, "another test",3))
 
 

@@ -10,9 +10,9 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.attemptatautentification.DeadlineEditActivity
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.R
-import com.example.attemptatautentification.deadlineToEdit
+import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
@@ -41,7 +41,6 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
     }
 
     class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
         private val name: TextView = itemView.findViewById(R.id.name)
         private val notes: TextView = itemView.findViewById(R.id.notes)
@@ -85,7 +84,4 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
             parentActivity.startActivity(intent)
         }
     }
-
-    fun changeFinished(view: View){}
-
 }
