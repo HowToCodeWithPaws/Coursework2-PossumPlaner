@@ -1,29 +1,25 @@
 package com.example.attemptatautentification.ui.deadlineEdit
 
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
-import com.example.attemptatautentification.ui.calendar.CalendarAdapter
-import com.example.attemptatautentification.ui.calendar.user
+import com.example.attemptatautentification.possumLib.Subplan
+import com.example.attemptatautentification.ui.list.user
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import kotlinx.android.synthetic.main.deadline_item.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 @RequiresApi(Build.VERSION_CODES.O)
 var deadlineToEdit: Plan = Plan()
@@ -36,6 +32,7 @@ class DeadlineEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_deadline_edit_screen)
         deadline_importance.rating = deadlineToEdit.importance.toFloat()
         deadline_title.setText(deadlineToEdit.title)
@@ -86,10 +83,18 @@ class DeadlineEditActivity : AppCompatActivity() {
         }
 
         refresh(rv_subplans)
+///???
+        add_subplan.setOnClickListener {
+            var new_subplan: Subplan = Subplan()
+            adapter?.notifyDataSetChanged()
+            deadlineToEdit.subplans.add(new_subplan)
+            //     adapter.refreshDrawableState()
+            adapter?.notifyDataSetChanged()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun refresh(rvDeadlineList :RecyclerView) {
+    fun refresh(rvDeadlineList: RecyclerView) {
         adapter = DeadlineEditAdapter(deadlineToEdit.subplans)
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.applicationContext)
@@ -104,6 +109,7 @@ class DeadlineEditActivity : AppCompatActivity() {
         deadlineToEdit.date = LocalDate.parse(deadline_date.text.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         deadlineToEdit.importance = deadline_importance.rating.toInt()
         deadlineToEdit.isFinished = deadline_finished.isChecked
+
         this.finish()
     }
 }

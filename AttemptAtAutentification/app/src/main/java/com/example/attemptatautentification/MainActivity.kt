@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun LogIn(view: View) {
         visitedSecond = false
-        //logIn.setBackgroundColor(android.graphics.Color.rgb(103, 58, 183));
-        //signIn.setBackgroundColor(android.graphics.Color.rgb(98, 0, 238));
         login_ = login.text.toString()
         password_ = password.text.toString()
 
@@ -92,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     //дефолтно обновляем интерфейс для юзера
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
+      //  if (user != null) {
 
                 ///TODO USER FROM SERVER
             val category = Category("common")
@@ -108,17 +106,19 @@ class MainActivity : AppCompatActivity() {
             new_user.plans.add(Plan("test actually!", false, category, "another test",3))
 
 
-            input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
-                    .toString()
+//        if (user != null) {
+//            input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
+//                    .toString()
+//        }
             if (!visitedSecond) {
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
                 randomIntent.putExtra("user_with_deadlines", new_user)
                 startActivity(randomIntent)
                 visitedSecond = true
             }
-        } else {
-            updateUI("Нет пользователя")
-        }
+//        } else {
+//            updateUI("Нет пользователя")
+//        }
         input.refreshDrawableState()
     }
 

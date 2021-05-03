@@ -7,10 +7,10 @@
     android:layout_height="wrap_content"
     android:background="@drawable/items_in_rv">
 
-    <TextView
+    <EditText
         android:id="@+id/subplan_name"
-        android:layout_width="103dp"
-        android:layout_height="28dp"
+        android:layout_width="355dp"
+        android:layout_height="33dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/black"
@@ -18,10 +18,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/subplan_checkBox"

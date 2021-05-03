@@ -2,10 +2,13 @@ package com.example.attemptatautentification.ui.deadlineEdit
 
 import android.content.Intent
 import android.os.Build
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -18,7 +21,7 @@ import com.example.attemptatautentification.ui.calendar.parentActivity
 import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 
-class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>)  :
+class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>) :
         RecyclerView.Adapter<DeadlineEditAdapter.DeadlineEditViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeadlineEditViewHolder {
@@ -29,6 +32,7 @@ class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>)  :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: DeadlineEditViewHolder, position: Int) {
         holder.bind(getItem(position))
+        //   holder.editText.setText(sublpans[position]?.title)
     }
 
     override fun getItemCount(): Int {
@@ -49,27 +53,23 @@ class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>)  :
         @RequiresApi(Build.VERSION_CODES.O)
         var subplan_note: Subplan = Subplan()
 
-// TODO: 02.05.2021
-//        init {
-//            itemView.setOnClickListener {
-//                openDeadlineScreenEdit(plan)
-//            }
-//        }
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(subplan: Subplan) {
             subplan_note = subplan
             name.text = subplan.title
+
             check.isChecked = subplan.isFinished // todo удаление из списка?
-            check.setOnClickListener({subplan.isFinished = check.isChecked})
+            check.setOnClickListener({ subplan.isFinished = check.isChecked })
+
+            name.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                    subplan.title = name.text.toString()
+                }
+
+                override fun afterTextChanged(editable: Editable) {}
+            })
         }
-
-
-//        fun openDeadlineScreenEdit(deadline: Plan) {
-//            deadlineToEdit = deadline
-//            val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
-//            intent.putExtra("deadline", deadline)
-//            parentActivity.startActivity(intent)
-//        }
     }
 }
