@@ -42,7 +42,8 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         setContentView(R.layout.activity_deadline_edit_screen)
         deadline_importance.rating = deadlineToEdit.importance.toFloat()
         deadline_title.setText(deadlineToEdit.title)
-        deadline_category.setText(deadlineToEdit.category.name)
+     //   deadline_category.setText(deadlineToEdit.category.name)
+      //  categories_spinner.set
         deadline_notes.setText(deadlineToEdit.notes)
         deadline_finished.isChecked = deadlineToEdit.isFinished
 
@@ -102,7 +103,10 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         val spinner: Spinner = findViewById(R.id.categories_spinner)
 // Create an ArrayAdapter using the string array and a default spinner layout
 
-       var adapter =  ArrayAdapter(this,android.R.layout.simple_spinner_item,user.categories)
+       val names_c :  ArrayList<String> = arrayListOf()
+
+//todo categories as?
+       var adapter =  ArrayAdapter(this,android.R.layout.simple_spinner_item,user.categories_names)
             // Apply the adapter to the spinner
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Apply the adapter to the spinner

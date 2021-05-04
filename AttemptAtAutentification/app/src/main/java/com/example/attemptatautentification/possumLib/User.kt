@@ -46,6 +46,18 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
         }
         set(value) {
             field = value
+
+            for(cat : Category in value){
+                categories_names.add(cat.name)
+            }
+        }
+
+    var categories_names: ArrayList<String> = ArrayList()
+        get() {
+            return field
+        }
+        set(value) {
+            field = value
         }
 
     fun addCategory(category: Category) {
@@ -61,5 +73,7 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
         token = token_
         plans = plans_
         categories = categories_
+
+        categories_names.add("без категории")
     }
 }

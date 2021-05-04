@@ -7,19 +7,21 @@ import android.os.Parcelable
 import androidx.annotation.RequiresApi
 import java.io.Serializable
 
-class Category constructor(name_: String = "новая категория", colour_: Int = 0): Serializable/*, Parcelable*/ {
-     var name: String = "новая категория"
-         get() {
+class Category constructor(name_: String = "новая категория", colour_: Int = 0) : Serializable/*, Parcelable*/ {
+    var name: String = "новая категория"
+        get() {
             return field
         }
         set(value) {
-            if (value.length in 1..19) {
+            if (value == "без категории") {
+                field = ""
+            } else if (value.length in 0..19) {
                 field = value
             }
         }
 
-     var colour: Int = 0
-         get() {
+    var colour: Int = 0
+        get() {
             return field
         }
         set(value) {
@@ -32,7 +34,11 @@ class Category constructor(name_: String = "новая категория", colo
 //    }
 
     init {
-        name = name_
+        name = if (name_ == "без категории") {
+            ""
+        } else {
+            name_
+        }
         colour = colour_
     }
 

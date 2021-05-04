@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/subplan_name"
         android:layout_width="355dp"
-        android:layout_height="33dp"
+        android:layout_height="35dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/black"
