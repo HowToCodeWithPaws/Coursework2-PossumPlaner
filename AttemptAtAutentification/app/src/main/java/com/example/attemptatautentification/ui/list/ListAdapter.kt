@@ -12,6 +12,7 @@ import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
@@ -82,6 +83,7 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
 
         fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
+            userToEdit = user
             val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
             intent.putExtra("deadline", deadline)
             parentActivity.startActivity(intent)

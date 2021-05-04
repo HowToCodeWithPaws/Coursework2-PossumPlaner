@@ -1,9 +1,13 @@
 package com.example.attemptatautentification.ui.deadlineEdit
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +16,7 @@ import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.Subplan
+import com.example.attemptatautentification.possumLib.User
 import com.example.attemptatautentification.ui.list.user
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import kotlinx.android.synthetic.main.deadline_item.*
@@ -23,8 +28,9 @@ import kotlin.collections.ArrayList
 
 @RequiresApi(Build.VERSION_CODES.O)
 var deadlineToEdit: Plan = Plan()
+var userToEdit: User = User()
 
-class DeadlineEditActivity : AppCompatActivity() {
+class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     var adapter: DeadlineEditAdapter? = null
 
@@ -91,7 +97,33 @@ class DeadlineEditActivity : AppCompatActivity() {
             //     adapter.refreshDrawableState()
             adapter?.notifyDataSetChanged()
         }
+
+
+        val spinner: Spinner = findViewById(R.id.categories_spinner)
+// Create an ArrayAdapter using the string array and a default spinner layout
+
+       var adapter =  ArrayAdapter(this,android.R.layout.simple_spinner_item,user.categories)
+            // Apply the adapter to the spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Apply the adapter to the spinner
+
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = this
+
+
     }
+
+    //class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+            // An item was selected. You can retrieve the selected item using
+            // parent.getItemAtPosition(pos)
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>) {
+            // Another interface callback
+        }
+   // }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun refresh(rvDeadlineList: RecyclerView) {
@@ -104,6 +136,7 @@ class DeadlineEditActivity : AppCompatActivity() {
     fun save(view: View) {
         deadlineToEdit.title = deadline_title.text.toString()
         deadlineToEdit.category = Category(deadline_category.text.toString())
+        deadlineToEdit.category = Category(categories_spinner.selectedItem.toString())
         deadlineToEdit.notes = deadline_notes.text.toString()
         deadlineToEdit.deadline = LocalDate.parse(deadline_deadline.text.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         deadlineToEdit.date = LocalDate.parse(deadline_date.text.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"))

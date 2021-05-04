@@ -21,6 +21,7 @@ import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.User
+import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
 import kotlinx.android.synthetic.main.activity_main.*
 
 var user: User = User()
@@ -77,6 +78,7 @@ class ListFragment : Fragment() {
 
     fun openDeadlineScreen(deadline: Plan) {
         deadlineToEdit = deadline
+        userToEdit = user
         val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
         intent.putExtra("deadline", deadline)
         parentActivity.startActivity(intent)

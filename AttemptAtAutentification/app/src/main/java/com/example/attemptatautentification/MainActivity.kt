@@ -94,14 +94,18 @@ class MainActivity : AppCompatActivity() {
 
                 ///TODO USER FROM SERVER
             val category = Category("common")
+        val clist :ArrayList<Category> = arrayListOf()
+        clist.add(category)
+        clist.add(Category("newting"))
+
             val subplan = Subplan("s1")
             val subplan2 = Subplan("s2")
             val slist :ArrayList<Subplan> = arrayListOf<Subplan>()
             slist.add(subplan)
             slist.add(subplan2)
             val new_list: ArrayList<Plan> = arrayListOf<Plan>()
-            new_list.add(Plan("time to", false, Category("newting")))
-            val new_user: User = User("Dead", "token?", new_list)
+            new_list.add(Plan("time to", false, clist[1]))
+            val new_user: User = User("Dead", "token?", new_list, clist)
             new_user.plans.add(Plan("what", false, category, "test",2, LocalDate.of(2000,2,2), LocalDate.of(2021, 5, 4), slist))
             new_user.plans.add(Plan("test actually!", false, category, "another test",3))
 

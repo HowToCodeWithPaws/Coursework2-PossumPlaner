@@ -23,6 +23,7 @@ import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.User
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
+import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
 import com.example.attemptatautentification.ui.list.ListAdapter
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -96,6 +97,7 @@ class CalendarFragment : Fragment() {
 
     fun openDeadlineScreen(deadline: Plan) {
         deadlineToEdit = deadline
+        userToEdit =  user
         val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
         intent.putExtra("deadline", deadline)
         parentActivity.startActivity(intent)
