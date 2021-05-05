@@ -28,4 +28,9 @@
     <string name="importance_caption">важность</string>
     <string name="date">дата</string>
     <string name="subplans">подзадачи</string>
+    <string name="name_caption">название</string>
+    <string name="notes_caption">заметки</string>
+    <string name="deadline_caption">дедлайн</string>
+    <string name="date_caption">дата</string>
+    <string name="delete">удалить</string>
 </resources>

@@ -76,7 +76,7 @@ class CalendarFragment : Fragment() {
             this.context?.let { ContextCompat.getDrawable(it, R.drawable.divider_drawable) };
         if (mDivider != null) {
             divide.setDrawable(mDivider)
-        };
+        }
 
         rvDeadlineList.addItemDecoration(divide)
 
@@ -85,6 +85,7 @@ class CalendarFragment : Fragment() {
             var new_deadline: Plan = Plan()
             var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
             new_deadline.date = ldate
+            new_deadline.deadline = ldate
             //todo refresh
             openDeadlineScreen(new_deadline)
             adapter?.notifyDataSetChanged()

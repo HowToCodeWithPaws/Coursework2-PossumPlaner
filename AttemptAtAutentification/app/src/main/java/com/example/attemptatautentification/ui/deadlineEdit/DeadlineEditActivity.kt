@@ -149,4 +149,11 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         this.finish()
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun delete(view: View) {
+        userToEdit.plans.remove(deadlineToEdit)
+
+        this.finish()
+    }
 }
