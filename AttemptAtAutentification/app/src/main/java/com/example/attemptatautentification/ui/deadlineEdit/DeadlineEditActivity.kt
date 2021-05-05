@@ -42,8 +42,6 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         setContentView(R.layout.activity_deadline_edit_screen)
         deadline_importance.rating = deadlineToEdit.importance.toFloat()
         deadline_title.setText(deadlineToEdit.title)
-     //   deadline_category.setText(deadlineToEdit.category.name)
-      //  categories_spinner.set
         deadline_notes.setText(deadlineToEdit.notes)
         deadline_finished.isChecked = deadlineToEdit.isFinished
 
@@ -60,7 +58,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             calDed.set(Calendar.MONTH, monthOfYear)
             calDed.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "dd.MM.yyyy" // mention the format you need
+            val myFormat = "dd.MM.yyyy"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             deadline_deadline.setText(sdf.format(calDed.time))
         }
@@ -70,7 +68,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             calDate.set(Calendar.MONTH, monthOfYear)
             calDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "dd.MM.yyyy" // mention the format you need
+            val myFormat = "dd.MM.yyyy"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             deadline_date.setText(sdf.format(calDate.time))
         }
@@ -95,39 +93,20 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             var new_subplan: Subplan = Subplan()
             adapter?.notifyDataSetChanged()
             deadlineToEdit.subplans.add(new_subplan)
-            //     adapter.refreshDrawableState()
             adapter?.notifyDataSetChanged()
         }
 
-
         val spinner: Spinner = findViewById(R.id.categories_spinner)
-// Create an ArrayAdapter using the string array and a default spinner layout
-
-       val names_c :  ArrayList<String> = arrayListOf()
-
-//todo categories as?
        var adapter =  ArrayAdapter(this,android.R.layout.simple_spinner_item,user.categories_names)
-            // Apply the adapter to the spinner
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Apply the adapter to the spinner
-
         spinner.adapter = adapter
         spinner.onItemSelectedListener = this
-
-
     }
-
-    //class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
-
         override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-            // An item was selected. You can retrieve the selected item using
-            // parent.getItemAtPosition(pos)
         }
 
         override fun onNothingSelected(parent: AdapterView<*>) {
-            // Another interface callback
         }
-   // }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun refresh(rvDeadlineList: RecyclerView) {

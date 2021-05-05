@@ -86,12 +86,11 @@ class CalendarFragment : Fragment() {
             var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
             new_deadline.date = ldate
             new_deadline.deadline = ldate
-            //todo refresh
+            adapter?.notifyDataSetChanged()
             openDeadlineScreen(new_deadline)
-            adapter?.notifyDataSetChanged()
             user.plans.add(new_deadline)
-            //     adapter.refreshDrawableState()
             adapter?.notifyDataSetChanged()
+            refresh(rvDeadlineList, calendar)
         }
         return root
     }

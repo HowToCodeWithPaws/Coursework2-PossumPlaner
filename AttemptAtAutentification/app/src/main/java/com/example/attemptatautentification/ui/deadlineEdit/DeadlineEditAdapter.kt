@@ -32,7 +32,6 @@ class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>) :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: DeadlineEditViewHolder, position: Int) {
         holder.bind(getItem(position))
-        //   holder.editText.setText(sublpans[position]?.title)
     }
 
     override fun getItemCount(): Int {

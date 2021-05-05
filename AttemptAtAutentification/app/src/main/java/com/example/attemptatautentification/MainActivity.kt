@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
     var authManager: AuthManager = AuthManager()
     var visitedSecond: Boolean = false
 
+    fun getSaved(){
+        
+    }
+
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
 
@@ -90,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     //дефолтно обновляем интерфейс для юзера
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateUI(user: FirebaseUser?) {
-      //  if (user != null) {
+        if (user != null) {
 
                 ///TODO USER FROM SERVER
             val category = Category("common")
@@ -110,19 +114,19 @@ class MainActivity : AppCompatActivity() {
             new_user.plans.add(Plan("test actually!", false, category, "another test",3))
 
 
-//        if (user != null) {
-//            input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
-//                    .toString()
-//        }
+        if (user != null) {
+            input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
+                    .toString()
+        }
             if (!visitedSecond) {
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
                 randomIntent.putExtra("user_with_deadlines", new_user)
                 startActivity(randomIntent)
                 visitedSecond = true
             }
-//        } else {
-//            updateUI("Нет пользователя")
-//        }
+        } else {
+            updateUI("Нет пользователя")
+        }
         input.refreshDrawableState()
     }
 
