@@ -68,6 +68,10 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
         categories.remove(category)
     }
 
+    override fun toString():String{
+        return "name "+ name +"\n\ncategories " + categories_names.joinToString { el -> "\n"+ el } + "\n\nplans" + plans.joinToString { el->"\n"+el.title }
+    }
+
     init {
         name = name_
         token = token_

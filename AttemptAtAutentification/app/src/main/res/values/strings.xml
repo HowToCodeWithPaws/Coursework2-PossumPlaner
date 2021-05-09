@@ -33,4 +33,7 @@
     <string name="deadline_caption">дедлайн</string>
     <string name="date_caption">дата</string>
     <string name="delete">удалить</string>
+    <string name="read">прочитать</string>
+    <string name="write">записать</string>
+    <string name="enter_saved">войти в локальный аккаунт</string>
 </resources>

@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.R
+import com.example.attemptatautentification.passed_user
 import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.Subplan
 import com.example.attemptatautentification.possumLib.User
 import com.example.attemptatautentification.ui.list.user
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import kotlinx.android.synthetic.main.deadline_item.*
 import java.text.SimpleDateFormat
@@ -134,5 +136,22 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         userToEdit.plans.remove(deadlineToEdit)
 
         this.finish()
+    }
+
+    fun save() {
+        val sharedPref = this.getSharedPreferences("User_saved" ,MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            val data = userToEdit
+            val gson = GsonBuilder().create()
+            putString("User", gson.toJson(data))
+            println("выходим " + gson.toJson(data))
+            println("user to edit  " + userToEdit.toString())
+            apply()
+        }
+    }
+
+    override fun onPause() {
+        save()
+        super.onPause()
     }
 }
