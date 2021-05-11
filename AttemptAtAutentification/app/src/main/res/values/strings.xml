@@ -36,4 +36,5 @@
     <string name="read">прочитать</string>
     <string name="write">записать</string>
     <string name="enter_saved">войти в локальный аккаунт</string>
+    <string name="plans_in_category">планы в категории</string>
 </resources>

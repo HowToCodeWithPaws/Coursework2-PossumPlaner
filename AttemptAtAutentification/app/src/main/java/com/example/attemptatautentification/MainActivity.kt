@@ -132,7 +132,6 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun exampleUser() {
         val clist: ArrayList<Category> = arrayListOf()
-        clist.add(Category())
 
         val new_list: ArrayList<Plan> = arrayListOf<Plan>()
         new_user = User("Dead", "token?", new_list, clist)

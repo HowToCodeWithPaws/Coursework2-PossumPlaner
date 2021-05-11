@@ -14,6 +14,10 @@ import com.example.attemptatautentification.ui.list.parentActivity
 import com.example.attemptatautentification.ui.list.setNewUser
 import com.example.attemptatautentification.ui.list.setParent
 import com.example.attemptatautentification.ui.list.user
+import com.example.attemptatautentification.ui.settings.parentActivitySettings
+import com.example.attemptatautentification.ui.settings.parentSettingsCategories
+import com.example.attemptatautentification.ui.settings.setNewUserSettings
+import com.example.attemptatautentification.ui.settings.setParentSettings
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -36,6 +40,9 @@ class BottomNavigationScreen : AppCompatActivity() {
         setParent(this)
         com.example.attemptatautentification.ui.calendar.setNewUser(passed_user)
         com.example.attemptatautentification.ui.calendar.setParent(this)
+        setNewUserSettings(passed_user)
+        setParentSettings(this)
+        parentSettingsCategories = this
         val appBarConfiguration = AppBarConfiguration(
                 setOf(
                         R.id.navigation_list,

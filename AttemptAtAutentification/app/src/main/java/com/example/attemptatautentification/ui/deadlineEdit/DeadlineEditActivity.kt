@@ -51,42 +51,48 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         var formattedDate = deadlineToEdit.date.format(formatter)
         var formattedDeadline = deadlineToEdit.deadline.format(formatter)
         deadline_deadline.setText(formattedDeadline)
-              deadline_date.setText(formattedDate)
+        deadline_date.setText(formattedDate)
         var calDed = Calendar.getInstance()
         var calDate = Calendar.getInstance()
 
-        val dateSetListenerDeadline = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            calDed.set(Calendar.YEAR, year)
-            calDed.set(Calendar.MONTH, monthOfYear)
-            calDed.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        val dateSetListenerDeadline =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                calDed.set(Calendar.YEAR, year)
+                calDed.set(Calendar.MONTH, monthOfYear)
+                calDed.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "dd.MM.yyyy"
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            deadline_deadline.setText(sdf.format(calDed.time))
-        }
+                val myFormat = "dd.MM.yyyy"
+                val sdf = SimpleDateFormat(myFormat, Locale.US)
+                deadline_deadline.setText(sdf.format(calDed.time))
+            }
 
-        val dateSetListenerDate = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            calDate.set(Calendar.YEAR, year)
-            calDate.set(Calendar.MONTH, monthOfYear)
-            calDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        val dateSetListenerDate =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                calDate.set(Calendar.YEAR, year)
+                calDate.set(Calendar.MONTH, monthOfYear)
+                calDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "dd.MM.yyyy"
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            deadline_date.setText(sdf.format(calDate.time))
-        }
+                val myFormat = "dd.MM.yyyy"
+                val sdf = SimpleDateFormat(myFormat, Locale.US)
+                deadline_date.setText(sdf.format(calDate.time))
+            }
 
         deadline_deadline.setOnClickListener {
-            DatePickerDialog(this@DeadlineEditActivity, dateSetListenerDeadline,
-                    calDed.get(Calendar.YEAR),
-                    calDed.get(Calendar.MONTH),
-                    calDed.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this@DeadlineEditActivity, dateSetListenerDeadline,
+                calDed.get(Calendar.YEAR),
+                calDed.get(Calendar.MONTH),
+                calDed.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         deadline_date.setOnClickListener {
-            DatePickerDialog(this@DeadlineEditActivity, dateSetListenerDate,
-                    calDate.get(Calendar.YEAR),
-                    calDate.get(Calendar.MONTH),
-                    calDate.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this@DeadlineEditActivity, dateSetListenerDate,
+                calDate.get(Calendar.YEAR),
+                calDate.get(Calendar.MONTH),
+                calDate.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         refresh(rv_subplans)
@@ -99,16 +105,20 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         }
 
         val spinner: Spinner = findViewById(R.id.categories_spinner)
-       var adapter =  ArrayAdapter(this,android.R.layout.simple_spinner_item,user.categories_names)
+        var adapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, user.categories_names)
+        println(user.categories_names.joinToString { e->e+" " }
+        )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
         spinner.onItemSelectedListener = this
     }
-        override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        }
 
-        override fun onNothingSelected(parent: AdapterView<*>) {
-        }
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun refresh(rvDeadlineList: RecyclerView) {
@@ -123,8 +133,14 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         deadlineToEdit.category = Category(deadline_category.text.toString())
         deadlineToEdit.category = Category(categories_spinner.selectedItem.toString())
         deadlineToEdit.notes = deadline_notes.text.toString()
-        deadlineToEdit.deadline = LocalDate.parse(deadline_deadline.text.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-        deadlineToEdit.date = LocalDate.parse(deadline_date.text.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        deadlineToEdit.deadline = LocalDate.parse(
+            deadline_deadline.text.toString(),
+            DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        )
+        deadlineToEdit.date = LocalDate.parse(
+            deadline_date.text.toString(),
+            DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        )
         deadlineToEdit.importance = deadline_importance.rating.toInt()
         deadlineToEdit.isFinished = deadline_finished.isChecked
 
@@ -139,7 +155,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     }
 
     fun save() {
-        val sharedPref = this.getSharedPreferences("User_saved" ,MODE_PRIVATE) ?: return
+        val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             val data = userToEdit
             val gson = GsonBuilder().create()

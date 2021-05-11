@@ -62,10 +62,17 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
 
     fun addCategory(category: Category) {
         categories.add(category)
+        categories_names.add(category.name)
     }
 
-    fun deletePlan(category: Category) {
+    fun deleteCategory(category: Category) {
+    //    for (p in plans){
+    //        if (p.category.name.equals(category.name)){todo ???
+    //            plans.remove(p)
+     //       }
+    //    }
         categories.remove(category)
+        categories_names.remove(category.name)
     }
 
     override fun toString():String{

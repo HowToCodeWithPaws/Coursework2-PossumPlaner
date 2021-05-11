@@ -5,20 +5,27 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Я авторизатор оппоссумов"
+        android:label="PossumPlanner"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AttemptAtAutentification">
-        <activity android:name=".BottomNavigationScreen"
-            android:label="BottomNavigationActivity">
-        </activity>
-        <activity android:name="com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity"
-            android:label="DeadlineEditActivity">
-        </activity>
-        <activity android:name=".MainActivity"
-            android:label="mainActivity">
+        <activity android:name=".ui.settings.CategoryEditActivity"
+            android:label="Категория"  ></activity>
+        <activity
+            android:name=".ui.settings.SettingsCategoriesScreen"
+            android:label="Категории" />
+        <activity
+            android:name=".BottomNavigationScreen"
+            android:label="Navigation" />
+        <activity
+            android:name=".ui.deadlineEdit.DeadlineEditActivity"
+            android:label="План" />
+        <activity
+            android:name=".MainActivity"
+            android:label="Добро пожаловать!">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

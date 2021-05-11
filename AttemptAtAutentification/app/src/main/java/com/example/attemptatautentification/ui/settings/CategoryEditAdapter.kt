@@ -1,47 +1,52 @@
-package com.example.attemptatautentification.ui.list
+package com.example.attemptatautentification.ui.settings
 
 import android.content.Intent
 import android.os.Build
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.RatingBar
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.R
-import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.possumLib.Subplan
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditAdapter
+import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
-import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
-import java.text.SimpleDateFormat
+import com.example.attemptatautentification.ui.list.parentActivity
+import com.example.attemptatautentification.ui.list.user
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.ArrayList
 
-class ListAdapter(private val deadlines: ArrayList<Plan>) :
-    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class CategoryEditAdapter(private val plans: ArrayList<Plan>) :
+    RecyclerView.Adapter<CategoryEditAdapter.CategoryEditViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
-        return ListViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryEditViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
+        return CategoryEditViewHolder(view)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryEditViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
     override fun getItemCount(): Int {
-        println("size = ${deadlines.size}")
-        return deadlines.size
+        println("size = ${plans.size}")
+        return plans.size
     }
 
     fun getItem(position: Int): Plan {
-        return deadlines[position];
+        return plans[position]
     }
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class CategoryEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
         private val name: TextView = itemView.findViewById(R.id.name)
