@@ -1,9 +1,7 @@
-package com.example.attemptatautentification.ui.settings
+package com.example.attemptatautentification.ui.categoryEdit
 
 import android.content.Intent
 import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Plan
-import com.example.attemptatautentification.possumLib.Subplan
 import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
-import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditAdapter
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
 import com.example.attemptatautentification.ui.list.parentActivity

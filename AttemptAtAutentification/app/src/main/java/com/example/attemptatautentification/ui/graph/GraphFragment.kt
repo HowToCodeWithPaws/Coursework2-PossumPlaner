@@ -1,29 +1,86 @@
 package com.example.attemptatautentification.ui.graph
 
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.attemptatautentification.BottomNavigationScreen
 import com.example.attemptatautentification.R
+import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.possumLib.Subplan
+import com.example.attemptatautentification.possumLib.User
+import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
+import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
+import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
+import com.example.attemptatautentification.ui.list.ListAdapter
+import com.example.attemptatautentification.ui.list.parentActivity
+import com.example.attemptatautentification.ui.list.user
+import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
+import java.util.ArrayList
 
-class GraphFragment  : Fragment() {
+var userGraph: User = User()
 
-  //  private lateinit var graphViewModel: GraphViewModel
+var parentActivityGraph: BottomNavigationScreen = BottomNavigationScreen()
 
+
+class GraphFragment : Fragment() {
+
+    var adapterUI: ListAdapter? = null
+    var adapterUNI: ListAdapter? = null
+    var adapterNUI: ListAdapter? = null
+    var adapterNUNI: ListAdapter? = null
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_graph, container, false)
-//        graphViewModel =
-//            ViewModelProvider(this).get(GraphViewModel::class.java)
-//        val textView: TextView = root.findViewById(R.id.text_graph)
-//        graphViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+
+        val info:Button = root.findViewById<Button>(R.id.info)
+        info.setOnClickListener {
+            Toast.makeText(parentActivityGraph.applicationContext, "Перед вами матрица Эйзенхауэра!\n" +
+                    "Она делит ваши дела на категории в зависимости их срочности и важности." +
+                    "\nДля каждой категории существует совет по работе с задачами:" +
+                    "\nважное и срочное - сделать прямо сейчас" +
+                    "\nважное и не срочное - сделать, как только появится время" +
+                    "\nне важное и срочное - делегировать (если есть кому, конечно)" +
+                    "\nне важное и не срочное - забыть об их существовании", Toast.LENGTH_LONG).show()
+        }
+
+        val rv_UI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_urgentImportant)
+        adapterUI =
+            ListAdapter(user.plans.filter { it.isUrgent() && it.importance > 2  && !it.isFinished} as ArrayList<Plan>, "light")
+        rv_UI.adapter = adapterUI
+        rv_UI.layoutManager = LinearLayoutManager(this.context)
+
+        val rv_UNI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_urgentNotImportant)
+        adapterUNI = ListAdapter(user.plans.filter { it.isUrgent() && it.importance <= 2 && !it.isFinished} as ArrayList<Plan>, "light")
+        rv_UNI.adapter = adapterUNI
+        rv_UNI.layoutManager = LinearLayoutManager(this.context)
+
+        val rv_NUI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_notUrgentImportant)
+        adapterNUI = ListAdapter(user.plans.filter { !it.isUrgent() && it.importance > 2 && !it.isFinished} as ArrayList<Plan>, "light")
+        rv_NUI.adapter = adapterNUI
+        rv_NUI.layoutManager = LinearLayoutManager(this.context)
+
+        val rv_NUNI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_notUrgentNotImportant)
+        adapterUI = ListAdapter(user.plans.filter { !it.isUrgent() && it.importance <= 2 && !it.isFinished} as ArrayList<Plan>, "light")
+        rv_NUNI.adapter = adapterUI
+        rv_NUNI.layoutManager = LinearLayoutManager(this.context)
+
         return root
     }
 }

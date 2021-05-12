@@ -150,6 +150,11 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "Ð½Ð
         return "category: " + category.name + "\n" + "importance " + importance.toString() + "\ndate: " + date.toString()+ "\ndeadline: " + deadline.toString() ;
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun isUrgent():Boolean{
+        return LocalDate.now().plusDays(2) >= deadline
+    }
+
     init {
         isFinished = isFinished_
         title = title_

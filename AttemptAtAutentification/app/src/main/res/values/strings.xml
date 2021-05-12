@@ -37,4 +37,14 @@
     <string name="write">записать</string>
     <string name="enter_saved">войти в локальный аккаунт</string>
     <string name="plans_in_category">планы в категории</string>
+    <string name="urgent">срочное</string>
+    <string name="not_urgent">не срочное</string>
+    <string name="not_important">не важное</string>
+    <string name="important">важное</string>
+    <string name="explanation">Перед вами матрица Эйзенхауэра!
+        Она делит ваши дела на категории в зависимости их срочности и важности. Для каждой категории существует совет по работе с задачами:
+    важное и срочное - сделать прямо сейчас
+    \nважное и не срочное - сделать, как только появится время
+    \nне важное и срочное - делегировать (если есть кому, конечно)
+    \nне важное и не срочное - забыть об их существовании</string>
 </resources>

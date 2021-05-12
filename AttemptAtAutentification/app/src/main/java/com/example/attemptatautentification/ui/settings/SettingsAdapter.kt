@@ -1,14 +1,14 @@
 package com.example.attemptatautentification.ui.settings
 
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.R
+import com.example.attemptatautentification.ui.settings.categories.SettingsCategoriesScreen
+import com.example.attemptatautentification.ui.settings.categories.userWithCategories
 import java.util.ArrayList
 
 class SettingsAdapter(private val settings: ArrayList<String>) :

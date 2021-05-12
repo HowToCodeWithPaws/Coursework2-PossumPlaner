@@ -50,7 +50,7 @@ class ListFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
 
         val rvDeadlineList: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_list)
-        adapter = ListAdapter(user.plans)
+        adapter = ListAdapter(user.plans, "")
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
 

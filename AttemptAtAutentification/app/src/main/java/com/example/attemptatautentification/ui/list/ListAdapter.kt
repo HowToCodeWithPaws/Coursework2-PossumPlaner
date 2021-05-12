@@ -18,13 +18,20 @@ import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class ListAdapter(private val deadlines: ArrayList<Plan>) :
+class ListAdapter(private val deadlines: ArrayList<Plan>, private val mode: String) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
-        return ListViewHolder(view)
+        var view: View
+        if (mode == "light") {
+            view =
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.deadline_item_light, parent, false)
+            return ListViewHolder(view, "light")
+        }
+
+        view = LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
+
+        return ListViewHolder(view,"")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -41,19 +48,10 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         return deadlines[position];
     }
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
-        private val name: TextView = itemView.findViewById(R.id.name)
-        private val notes: TextView = itemView.findViewById(R.id.notes)
-        private val category: TextView = itemView.findViewById(R.id.category)
-        private val date: TextView = itemView.findViewById(R.id.date)
-        private val deadline: TextView = itemView.findViewById(R.id.deadline)
-        private val check: CheckBox = itemView.findViewById(R.id.checkBox)
-
+    open class ListViewHolder(itemView: View,  private val mode: String) : RecyclerView.ViewHolder(itemView) {
 
         @RequiresApi(Build.VERSION_CODES.O)
-        var plan: Plan = Plan()
+        open var plan: Plan = Plan()
 
         init {
             itemView.setOnClickListener {
@@ -62,26 +60,36 @@ class ListAdapter(private val deadlines: ArrayList<Plan>) :
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(deadlineItem: Plan) {
+        open fun bind(deadlineItem: Plan) {
+
             plan = deadlineItem
-            category.text = deadlineItem.category.name
+            val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
+            val name: TextView = itemView.findViewById(R.id.name)
+            val date: TextView = itemView.findViewById(R.id.date)
+            val deadline: TextView = itemView.findViewById(R.id.deadline)
             name.text = deadlineItem.title
-            notes.text = deadlineItem.notes
             date.text = deadlineItem.date.toString()
             deadline.text = deadlineItem.deadline.toString()
-            rating.rating = deadlineItem.importance.toFloat()
-            check.isChecked = deadlineItem.isFinished // todo удаление из списка?
-            check.setOnClickListener({ deadlineItem.isFinished = check.isChecked })
-
             var formattedDate = deadlineItem.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             var formattedDeadline =
                 deadlineItem.deadline.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             deadline.text = formattedDeadline
             date.text = formattedDate
+            rating.rating = deadlineItem.importance.toFloat()
+
+            if(mode!="light"){
+                val notes: TextView = itemView.findViewById(R.id.notes)
+                val category: TextView = itemView.findViewById(R.id.category)
+                val check: CheckBox = itemView.findViewById(R.id.checkBox)
+                category.text = deadlineItem.category.name
+                notes.text = deadlineItem.notes
+                check.isChecked = deadlineItem.isFinished // todo удаление из списка?
+                check.setOnClickListener({ deadlineItem.isFinished = check.isChecked })
+            }
         }
 
 
-        fun openDeadlineScreenEdit(deadline: Plan) {
+        open fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
             userToEdit = user
             val intent = Intent(parentActivity, DeadlineEditActivity::class.java)

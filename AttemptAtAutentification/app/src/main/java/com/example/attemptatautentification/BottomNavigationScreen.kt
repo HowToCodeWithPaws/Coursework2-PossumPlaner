@@ -1,25 +1,20 @@
 package com.example.attemptatautentification
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.attemptatautentification.possumLib.User
-import com.example.attemptatautentification.ui.list.parentActivity
+import com.example.attemptatautentification.ui.graph.parentActivityGraph
+import com.example.attemptatautentification.ui.graph.userGraph
 import com.example.attemptatautentification.ui.list.setNewUser
 import com.example.attemptatautentification.ui.list.setParent
-import com.example.attemptatautentification.ui.list.user
-import com.example.attemptatautentification.ui.settings.parentActivitySettings
-import com.example.attemptatautentification.ui.settings.parentSettingsCategories
+import com.example.attemptatautentification.ui.settings.categories.parentSettingsCategories
 import com.example.attemptatautentification.ui.settings.setNewUserSettings
 import com.example.attemptatautentification.ui.settings.setParentSettings
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 var passed_user = User()
@@ -42,6 +37,8 @@ class BottomNavigationScreen : AppCompatActivity() {
         com.example.attemptatautentification.ui.calendar.setParent(this)
         setNewUserSettings(passed_user)
         setParentSettings(this)
+        userGraph = passed_user
+        parentActivityGraph = this
         parentSettingsCategories = this
         val appBarConfiguration = AppBarConfiguration(
                 setOf(

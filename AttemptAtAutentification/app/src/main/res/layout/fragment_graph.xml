@@ -6,20 +6,137 @@
     android:layout_height="match_parent"
     tools:context=".ui.graph.GraphFragment">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_urgentImportant"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/urgent_important"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/text_graph"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/text_important"
+
+        android:layout_width="100dp"
+        android:layout_height="180dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
-        android:text="@string/screen_3"
-        android:textAlignment="center"
+        android:rotation="270"
+        android:text="@string/important"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <TextView
+        android:id="@+id/text_not_important"
+        android:layout_width="100dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
+        android:rotation="270"
+        android:text="@string/not_important"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notUrgentImportant"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/not_urgent_important"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notUrgentNotImportant"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/not_urgent_not_important"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_notUrgentImportant" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_urgentNotImportant"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/urgent_not_important"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_urgentImportant" />
+
+    <TextView
+        android:id="@+id/text_not_urgent"
+        android:layout_width="180dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="start"
+        android:text="@string/not_urgent"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_notUrgentImportant"
+        app:layout_constraintEnd_toEndOf="@id/rv_notUrgentImportant"
+        app:layout_constraintStart_toStartOf="@id/rv_notUrgentImportant"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.21" />
+
+    <TextView
+        android:id="@+id/text_urgent"
+        android:layout_width="181dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:gravity="start"
+        android:text="@string/urgent"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/rv_urgentImportant"
+        app:layout_constraintEnd_toEndOf="@id/rv_urgentImportant"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/info"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/rounded_buttons"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_info_details"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
+        app:layout_constraintStart_toStartOf="@+id/text_not_important"
+        app:layout_constraintTop_toBottomOf="@+id/rv_urgentNotImportant" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

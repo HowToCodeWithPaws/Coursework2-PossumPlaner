@@ -17,13 +17,15 @@
         android:paddingBottom="?actionBarSize"/>
 
 
-
     <Button
         android:id="@+id/addDeadlineList"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_buttons"
-        android:text="@string/plus"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_add"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.956"

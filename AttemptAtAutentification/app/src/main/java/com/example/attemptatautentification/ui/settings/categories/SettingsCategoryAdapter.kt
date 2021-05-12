@@ -1,21 +1,18 @@
-package com.example.attemptatautentification.ui.settings
+package com.example.attemptatautentification.ui.settings.categories
 
 import android.content.Intent
 import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Category
-import com.example.attemptatautentification.possumLib.Plan
-import com.example.attemptatautentification.possumLib.Subplan
-import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
+import com.example.attemptatautentification.ui.categoryEdit.CategoryEditActivity
+import com.example.attemptatautentification.ui.categoryEdit.categoryToEdit
+import com.example.attemptatautentification.ui.categoryEdit.userWithCategoryToEdit
 import java.util.ArrayList
 
 class SettingsCategoryAdapter(private val categories: ArrayList<Category>) :
