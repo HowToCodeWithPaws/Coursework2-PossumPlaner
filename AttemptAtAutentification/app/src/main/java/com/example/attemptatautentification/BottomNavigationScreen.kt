@@ -7,13 +7,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.attemptatautentification.possumLib.User
+import com.example.attemptatautentification.ui.calendar.parentActivityCalendar
+import com.example.attemptatautentification.ui.calendar.userCalendar
 import com.example.attemptatautentification.ui.graph.parentActivityGraph
 import com.example.attemptatautentification.ui.graph.userGraph
-import com.example.attemptatautentification.ui.list.setNewUser
-import com.example.attemptatautentification.ui.list.setParent
+import com.example.attemptatautentification.ui.list.parentActivityList
+import com.example.attemptatautentification.ui.list.userList
 import com.example.attemptatautentification.ui.settings.categories.parentSettingsCategories
-import com.example.attemptatautentification.ui.settings.setNewUserSettings
-import com.example.attemptatautentification.ui.settings.setParentSettings
+import com.example.attemptatautentification.ui.settings.parentActivitySettings
+import com.example.attemptatautentification.ui.settings.userSettings
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.GsonBuilder
 
@@ -27,16 +29,12 @@ class BottomNavigationScreen : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-        //passing info to fragments
-   //     val arguments = intent.extras
-     //   passed_user = arguments!!["user_with_deadlines"] as User
-        //     print(new_user.name + "\n" + new_user.plans[0].title + "\n" + new_user.plans[1].title)
-        setNewUser(passed_user)
-        setParent(this)
-        com.example.attemptatautentification.ui.calendar.setNewUser(passed_user)
-        com.example.attemptatautentification.ui.calendar.setParent(this)
-        setNewUserSettings(passed_user)
-        setParentSettings(this)
+        userList = passed_user
+        parentActivityList = this
+        userCalendar = passed_user
+        parentActivityCalendar = this
+        userSettings = passed_user
+        parentActivitySettings = this
         userGraph = passed_user
         parentActivityGraph = this
         parentSettingsCategories = this

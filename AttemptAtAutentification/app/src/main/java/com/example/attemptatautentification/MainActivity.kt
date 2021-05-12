@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_list.*
 import org.json.JSONStringer
 import java.lang.StringBuilder
 import java.time.LocalDate

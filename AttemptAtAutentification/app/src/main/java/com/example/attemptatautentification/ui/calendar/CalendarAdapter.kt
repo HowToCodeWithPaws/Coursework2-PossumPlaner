@@ -80,10 +80,10 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
 
         fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
-            userToEdit = user
-            val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
+            userToEdit = userCalendar
+            val intent = Intent(parentActivityCalendar, DeadlineEditActivity::class.java)
             intent.putExtra("deadline", deadline)
-            parentActivity.startActivity(intent)
+            parentActivityCalendar.startActivity(intent)
         }
     }
 }

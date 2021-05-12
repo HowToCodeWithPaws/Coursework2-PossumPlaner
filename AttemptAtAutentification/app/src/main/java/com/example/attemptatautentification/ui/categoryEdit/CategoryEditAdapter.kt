@@ -15,8 +15,8 @@ import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
-import com.example.attemptatautentification.ui.list.parentActivity
-import com.example.attemptatautentification.ui.list.user
+import com.example.attemptatautentification.ui.settings.parentActivitySettings
+import com.example.attemptatautentification.ui.settings.userSettings
 import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 
@@ -84,10 +84,10 @@ class CategoryEditAdapter(private val plans: ArrayList<Plan>) :
 
         fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
-            userToEdit = user
-            val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
+            userToEdit = userSettings
+            val intent = Intent(parentActivitySettings, DeadlineEditActivity::class.java)
             intent.putExtra("deadline", deadline)
-            parentActivity.startActivity(intent)
+            parentActivitySettings.startActivity(intent)
         }
     }
 }

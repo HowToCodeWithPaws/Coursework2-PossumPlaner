@@ -13,13 +13,11 @@ import com.example.attemptatautentification.R
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
-import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
-import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class ListAdapter(private val deadlines: ArrayList<Plan>, private val mode: String) :
-    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val mode: String) :
+    RecyclerView.Adapter<DeadlinesListAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         var view: View
         if (mode == "light") {
@@ -31,7 +29,7 @@ class ListAdapter(private val deadlines: ArrayList<Plan>, private val mode: Stri
 
         view = LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
 
-        return ListViewHolder(view,"")
+        return ListViewHolder(view, "")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -48,7 +46,8 @@ class ListAdapter(private val deadlines: ArrayList<Plan>, private val mode: Stri
         return deadlines[position];
     }
 
-    open class ListViewHolder(itemView: View,  private val mode: String) : RecyclerView.ViewHolder(itemView) {
+    open class ListViewHolder(itemView: View, private val mode: String) :
+        RecyclerView.ViewHolder(itemView) {
 
         @RequiresApi(Build.VERSION_CODES.O)
         open var plan: Plan = Plan()
@@ -77,7 +76,7 @@ class ListAdapter(private val deadlines: ArrayList<Plan>, private val mode: Stri
             date.text = formattedDate
             rating.rating = deadlineItem.importance.toFloat()
 
-            if(mode!="light"){
+            if (mode != "light") {
                 val notes: TextView = itemView.findViewById(R.id.notes)
                 val category: TextView = itemView.findViewById(R.id.category)
                 val check: CheckBox = itemView.findViewById(R.id.checkBox)
@@ -91,10 +90,10 @@ class ListAdapter(private val deadlines: ArrayList<Plan>, private val mode: Stri
 
         open fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
-            userToEdit = user
-            val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
+            userToEdit = userList
+            val intent = Intent(parentActivityList, DeadlineEditActivity::class.java)
             intent.putExtra("deadline", deadline)
-            parentActivity.startActivity(intent)
+            parentActivityList.startActivity(intent)
         }
     }
 }

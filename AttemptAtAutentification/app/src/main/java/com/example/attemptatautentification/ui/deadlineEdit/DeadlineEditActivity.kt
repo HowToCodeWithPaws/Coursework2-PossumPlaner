@@ -18,7 +18,7 @@ import com.example.attemptatautentification.possumLib.Category
 import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.Subplan
 import com.example.attemptatautentification.possumLib.User
-import com.example.attemptatautentification.ui.list.user
+import com.example.attemptatautentification.ui.list.userList
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import kotlinx.android.synthetic.main.deadline_item.*
@@ -106,8 +106,8 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         val spinner: Spinner = findViewById(R.id.categories_spinner)
         var adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, user.categories_names)
-        println(user.categories_names.joinToString { e->e+" " }
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, userList.categories_names)
+        println(userList.categories_names.joinToString { e->e+" " }
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter

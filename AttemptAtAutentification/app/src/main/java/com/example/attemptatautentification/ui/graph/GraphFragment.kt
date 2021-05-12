@@ -1,7 +1,6 @@
 package com.example.attemptatautentification.ui.graph
 
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,23 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.attemptatautentification.BottomNavigationScreen
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.possumLib.Plan
-import com.example.attemptatautentification.possumLib.Subplan
 import com.example.attemptatautentification.possumLib.User
-import com.example.attemptatautentification.ui.deadlineEdit.DeadlineEditActivity
-import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
-import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
-import com.example.attemptatautentification.ui.list.ListAdapter
-import com.example.attemptatautentification.ui.list.parentActivity
-import com.example.attemptatautentification.ui.list.user
-import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
+import com.example.attemptatautentification.ui.list.DeadlinesListAdapter
 import java.util.ArrayList
 
 var userGraph: User = User()
@@ -36,10 +26,10 @@ var parentActivityGraph: BottomNavigationScreen = BottomNavigationScreen()
 
 class GraphFragment : Fragment() {
 
-    var adapterUI: ListAdapter? = null
-    var adapterUNI: ListAdapter? = null
-    var adapterNUI: ListAdapter? = null
-    var adapterNUNI: ListAdapter? = null
+    var adapterUI: DeadlinesListAdapter? = null
+    var adapterUNI: DeadlinesListAdapter? = null
+    var adapterNUI: DeadlinesListAdapter? = null
+    var adapterNUNI: DeadlinesListAdapter? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -62,22 +52,22 @@ class GraphFragment : Fragment() {
 
         val rv_UI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_urgentImportant)
         adapterUI =
-            ListAdapter(user.plans.filter { it.isUrgent() && it.importance > 2  && !it.isFinished} as ArrayList<Plan>, "light")
+            DeadlinesListAdapter(userGraph.plans.filter { it.isUrgent() && it.importance > 2  && !it.isFinished} as ArrayList<Plan>, "light")
         rv_UI.adapter = adapterUI
         rv_UI.layoutManager = LinearLayoutManager(this.context)
 
         val rv_UNI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_urgentNotImportant)
-        adapterUNI = ListAdapter(user.plans.filter { it.isUrgent() && it.importance <= 2 && !it.isFinished} as ArrayList<Plan>, "light")
+        adapterUNI = DeadlinesListAdapter(userGraph.plans.filter { it.isUrgent() && it.importance <= 2 && !it.isFinished} as ArrayList<Plan>, "light")
         rv_UNI.adapter = adapterUNI
         rv_UNI.layoutManager = LinearLayoutManager(this.context)
 
         val rv_NUI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_notUrgentImportant)
-        adapterNUI = ListAdapter(user.plans.filter { !it.isUrgent() && it.importance > 2 && !it.isFinished} as ArrayList<Plan>, "light")
+        adapterNUI = DeadlinesListAdapter(userGraph.plans.filter { !it.isUrgent() && it.importance > 2 && !it.isFinished} as ArrayList<Plan>, "light")
         rv_NUI.adapter = adapterNUI
         rv_NUI.layoutManager = LinearLayoutManager(this.context)
 
         val rv_NUNI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_notUrgentNotImportant)
-        adapterUI = ListAdapter(user.plans.filter { !it.isUrgent() && it.importance <= 2 && !it.isFinished} as ArrayList<Plan>, "light")
+        adapterUI = DeadlinesListAdapter(userGraph.plans.filter { !it.isUrgent() && it.importance <= 2 && !it.isFinished} as ArrayList<Plan>, "light")
         rv_NUNI.adapter = adapterUI
         rv_NUNI.layoutManager = LinearLayoutManager(this.context)
 

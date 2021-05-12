@@ -24,28 +24,15 @@ import com.example.attemptatautentification.possumLib.Plan
 import com.example.attemptatautentification.possumLib.User
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
-import com.example.attemptatautentification.ui.list.ListAdapter
-import kotlinx.android.synthetic.main.fragment_calendar.*
-import kotlinx.android.synthetic.main.fragment_list.*
-import java.lang.StringBuilder
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-var user: User = User()
+var userCalendar: User = User()
 
-fun setNewUser(newUser: User) {
-    user = newUser
-}
+var parentActivityCalendar: BottomNavigationScreen = BottomNavigationScreen()
 
-var parentActivity: BottomNavigationScreen = BottomNavigationScreen()
-
-fun setParent(parent: BottomNavigationScreen) {
-    parentActivity = parent
-}
 
 class CalendarFragment : Fragment() {
     var adapter: CalendarAdapter? = null
@@ -88,7 +75,7 @@ class CalendarFragment : Fragment() {
             new_deadline.deadline = ldate
             adapter?.notifyDataSetChanged()
             openDeadlineScreen(new_deadline)
-            user.plans.add(new_deadline)
+            userCalendar.plans.add(new_deadline)
             adapter?.notifyDataSetChanged()
             refresh(rvDeadlineList, calendar)
         }
@@ -97,17 +84,17 @@ class CalendarFragment : Fragment() {
 
     fun openDeadlineScreen(deadline: Plan) {
         deadlineToEdit = deadline
-        userToEdit =  user
-        val intent = Intent(parentActivity, DeadlineEditActivity::class.java)
+        userToEdit =  userCalendar
+        val intent = Intent(parentActivityCalendar, DeadlineEditActivity::class.java)
         intent.putExtra("deadline", deadline)
-        parentActivity.startActivity(intent)
+        parentActivityCalendar.startActivity(intent)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun refresh(rvDeadlineList :RecyclerView, calendar: Calendar) {
         var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
 
-        adapter = CalendarAdapter(user.plans.filter { it.date.equals(ldate) } as ArrayList<Plan>)
+        adapter = CalendarAdapter(userCalendar.plans.filter { it.date.equals(ldate) } as ArrayList<Plan>)
 
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
