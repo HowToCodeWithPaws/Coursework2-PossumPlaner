@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         password_ = password.text.toString()
 
         if (!Validator.isEmail(login_)) {
-            updateUI("Это не емаил!")
+            updateUI("Это не email!")
         } else if (!Validator.strongEnoughPassword(password_)) {
             updateUI("Пароль слишком слабый!")
         } else {
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
 
             if (user != null) {
-                input.text = StringBuilder().append("Вы авторизированы, ваш емаил: ").append(user.email)
+                input.text = StringBuilder().append("Вы авторизированы, ваш email: ").append(user.email)
                         .toString()
             }
 

@@ -49,4 +49,6 @@
     \nне важное и не срочное - забыть об их существовании</string>
     <string name="putOff">перенос</string>
     <string name="repeat">повторение</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="deleteLocal">очистить локально сохраненные данные</string>
 </resources>

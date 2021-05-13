@@ -16,10 +16,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintVertical_bias="0.323" />
 
     <EditText
         android:id="@+id/login"
@@ -31,47 +31,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
-
-    <TextView
-        android:id="@+id/input"
-        android:layout_width="222dp"
-        android:layout_height="62dp"
-        android:text="ааа"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
-
-    <TextView
-        android:id="@+id/fromFile"
-        android:layout_width="222dp"
-        android:layout_height="99dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
-
-    <Button
-        android:id="@+id/logIn"
-        android:layout_width="216dp"
-        android:layout_height="52dp"
-        android:onClick="LogIn"
-        android:text="@string/log_in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.656" />
 
     <Button
         android:id="@+id/signIn"
@@ -83,19 +46,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintVertical_bias="0.967" />
+
+    <Button
+        android:id="@+id/logIn"
+        android:layout_width="216dp"
+        android:layout_height="52dp"
+        android:onClick="LogIn"
+        android:text="@string/log_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/input"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:background="@drawable/spinner"
+        android:text="@string/welcome"
+        android:gravity="center"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ellipsize="end"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
 
 
     <Button
         android:id="@+id/saved"
         android:layout_width="215dp"
         android:layout_height="52dp"
+        android:gravity="center_horizontal"
         android:onClick="getSaved"
         android:text="@string/enter_saved"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.751" />
+        app:layout_constraintVertical_bias="0.405" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

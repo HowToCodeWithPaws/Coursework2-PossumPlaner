@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AttemptAtAutentification">
-        <activity android:name=".ui.categoryEdit.CategoryEditActivity"
-            android:label="Категория"  ></activity>
+        <activity android:name=".ui.settings.UserSettingsActivity"></activity>
+        <activity
+            android:name=".ui.categoryEdit.CategoryEditActivity"
+            android:label="Категория" />
         <activity
             android:name=".ui.settings.categories.SettingsCategoriesScreen"
             android:label="Категории" />

@@ -51,9 +51,12 @@ class SettingsAdapter(private val settings: ArrayList<String>) :
 
 
         fun openSettingsScreen(name: String) {
-            if (name.equals("категории")) {
+            if (name=="категории") {
                 userWithCategories = userSettings
                 val intent = Intent(parentActivitySettings, SettingsCategoriesScreen::class.java)
+                parentActivitySettings.startActivity(intent)
+            }else if(name=="учетная запись"){
+                val intent = Intent(parentActivitySettings, UserSettingsActivity::class.java)
                 parentActivitySettings.startActivity(intent)
             }
             ///todo остальные
