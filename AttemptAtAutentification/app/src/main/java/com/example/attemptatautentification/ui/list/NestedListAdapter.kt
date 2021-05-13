@@ -10,7 +10,7 @@ import java.util.ArrayList
 
 
 class NestedListAdapter(
-    private var listList: List<ListForRV>
+        private var listList: List<ListForRV>
 ) : RecyclerView.Adapter<NestedListAdapter.ViewHolder>() {
 
     var adapter: DeadlinesListAdapter? = null
@@ -28,12 +28,12 @@ class NestedListAdapter(
                 binding.tvListName.text = this.name
                 if (listList[position].name == "Текущие дела") {
                     adapter =
-                        DeadlinesListAdapter(userList.plans.filter { it.isFinished == false } as ArrayList<Plan>,
-                            "")
+                            DeadlinesListAdapter(userList.plans.filter { it.isFinished == false } as ArrayList<Plan>,
+                                    "")
                 } else {
                     adapter =
-                        DeadlinesListAdapter(userList.plans.filter { it.isFinished == true } as ArrayList<Plan>,
-                            "")
+                            DeadlinesListAdapter(userList.plans.filter { it.isFinished == true } as ArrayList<Plan>,
+                                    "")
                 }
                 binding.deadlinesList.adapter = adapter
 
