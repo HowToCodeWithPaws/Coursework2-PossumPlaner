@@ -1,11 +1,14 @@
 package com.example.attemptatautentification.ui.list
 
+import android.R
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +23,7 @@ import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
 var userList: User = User()
 var parentActivityList: BottomNavigationScreen = BottomNavigationScreen()
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(),  AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -37,10 +40,6 @@ class ListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         _binding = FragmentListBinding.inflate(layoutInflater)
 
-        binding.rvList.layoutManager = LinearLayoutManager(parentActivityList.applicationContext)
-
-        nestedListAdapter = NestedListAdapter(listList)
-        binding.rvList.adapter = nestedListAdapter
         binding.addDeadlineList.setOnClickListener {
             var new_deadline: Plan = Plan()
             //todo refresh
@@ -50,17 +49,16 @@ class ListFragment : Fragment() {
             nestedListAdapter?.notifyDataSetChanged()
         }
 
-        val listCurrent = ListForRV(
-            "Текущие дела", false
-        )
-        val listFinished = ListForRV(
-            "Завершенные дела", false
-        )
+        var sorts = arrayListOf<String>("по срочности", "по важности")
 
-        listList.add(listCurrent)
-        listList.add(listFinished)
+        var adapter =
+                ArrayAdapter(parentActivityList.applicationContext, R.layout.simple_spinner_item, sorts)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        nestedListAdapter.notifyDataSetChanged()
+        binding.sortSpinner.adapter = adapter
+        binding.sortSpinner.onItemSelectedListener = this
+
+        refresh("по срочности")
 
         return binding.root
     }
@@ -77,5 +75,33 @@ class ListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        refresh(binding.sortSpinner.selectedItem as String)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        refresh("по срочности")
+    }
+
+    fun refresh(sort:String){
+        listList = ArrayList()
+        binding.rvList.layoutManager = LinearLayoutManager(parentActivityList.applicationContext)
+
+        nestedListAdapter = NestedListAdapter(listList)
+        binding.rvList.adapter = nestedListAdapter
+
+        val listCurrent = ListForRV(
+                "Текущие дела", true, sort
+        )
+        val listFinished = ListForRV(
+                "Завершенные дела", false,  sort
+        )
+
+        listList.add(listCurrent)
+        listList.add(listFinished)
+
+        nestedListAdapter.notifyDataSetChanged()
     }
 }

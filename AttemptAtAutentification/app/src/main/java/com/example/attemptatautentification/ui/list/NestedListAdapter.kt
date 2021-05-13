@@ -3,7 +3,11 @@ package com.example.attemptatautentification.ui.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
+import com.example.attemptatautentification.R
 import com.example.attemptatautentification.databinding.ListItemBinding
 import com.example.attemptatautentification.possumLib.Plan
 import java.util.ArrayList
@@ -11,9 +15,11 @@ import java.util.ArrayList
 
 class NestedListAdapter(
         private var listList: List<ListForRV>
-) : RecyclerView.Adapter<NestedListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<NestedListAdapter.ViewHolder>(){
 
+    var thisAdapter: NestedListAdapter? = null
     var adapter: DeadlinesListAdapter? = null
+    var thisHolder: ViewHolder? = null
 
     inner class ViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,16 +29,30 @@ class NestedListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        thisAdapter = this
         with(holder) {
             with(listList[position]) {
                 binding.tvListName.text = this.name
                 if (listList[position].name == "Текущие дела") {
+                    var array = userList.plans.filter { !it.isFinished } as ArrayList<Plan>
+                    if(this.sort=="по важности"){
+                        array.sortByDescending { it.importance }
+                    }else{
+                        array.sortBy { it.deadline }
+                    }
                     adapter =
-                            DeadlinesListAdapter(userList.plans.filter { it.isFinished == false } as ArrayList<Plan>,
+                            DeadlinesListAdapter(array,
                                     "")
                 } else {
+                    var array = userList.plans.filter { it.isFinished } as ArrayList<Plan>
+                    if(this.sort=="по важности"){
+                        array.sortByDescending { it.importance }
+                    }else{
+                        array.sortBy { it.deadline }
+                    }
                     adapter =
-                            DeadlinesListAdapter(userList.plans.filter { it.isFinished == true } as ArrayList<Plan>,
+                            DeadlinesListAdapter(array,
                                     "")
                 }
                 binding.deadlinesList.adapter = adapter

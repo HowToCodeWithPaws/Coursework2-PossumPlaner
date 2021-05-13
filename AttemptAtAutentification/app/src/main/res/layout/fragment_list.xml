@@ -12,9 +12,28 @@
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/list_item"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:paddingBottom="?actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:paddingBottom="?actionBarSize"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/list_item" />
+
+    <Spinner
+        android:id="@+id/sort_spinner"
+        android:layout_width="111dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/spinner"
+        android:fadingEdge="horizontal|vertical"
+        android:textSize="12sp"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/addDeadlineList"
+        app:layout_constraintTop_toBottomOf="@+id/addDeadlineList" />
 
     <Button
         android:id="@+id/addDeadlineList"
