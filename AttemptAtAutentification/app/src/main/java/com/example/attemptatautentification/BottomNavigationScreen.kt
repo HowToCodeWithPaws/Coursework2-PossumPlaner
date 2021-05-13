@@ -38,6 +38,7 @@ class BottomNavigationScreen : AppCompatActivity() {
         userGraph = passed_user
         parentActivityGraph = this
         parentSettingsCategories = this
+
         val appBarConfiguration = AppBarConfiguration(
                 setOf(
                         R.id.navigation_list,

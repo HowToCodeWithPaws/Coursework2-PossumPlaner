@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_deadline_edit_screen.*
 import kotlinx.android.synthetic.main.deadline_item.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
@@ -47,51 +48,76 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         deadline_notes.setText(deadlineToEdit.notes)
         deadline_finished.isChecked = deadlineToEdit.isFinished
 
-        var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
         var formattedDate = deadlineToEdit.date.format(formatter)
         var formattedDeadline = deadlineToEdit.deadline.format(formatter)
+
         deadline_deadline.setText(formattedDeadline)
         deadline_date.setText(formattedDate)
         var calDed = Calendar.getInstance()
         var calDate = Calendar.getInstance()
 
-        val dateSetListenerDeadline =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                calDed.set(Calendar.YEAR, year)
-                calDed.set(Calendar.MONTH, monthOfYear)
-                calDed.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val myFormat = "dd.MM.yyyy"
-                val sdf = SimpleDateFormat(myFormat, Locale.US)
-                deadline_deadline.setText(sdf.format(calDed.time))
-            }
+//        mTimePicker = findViewById(R.id.timePicker);
+//
+//        Calendar now = Calendar.getInstance();
+//
+//        mTimePicker.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
+//        mTimePicker.setCurrentMinute(now.get(Calendar.MINUTE));
+//
+//        mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+//
+//            @Override
+//            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+//                Toast.makeText(getApplicationContext(), "onTimeChanged",
+//                        Toast.LENGTH_SHORT).show();
+//
+//                mInfoTextView.setText("Часы: " + hourOfDay + "\n" + "Минуты: "
+//                        + minute);
+//            }
+//        });
+
+        val dateSetListenerDeadline =
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    calDed.set(Calendar.YEAR, year)
+                    calDed.set(Calendar.MONTH, monthOfYear)
+                    calDed.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    calDed.set(Calendar.HOUR_OF_DAY, 12)
+                    calDed.set(Calendar.MINUTE, 0)
+
+                    val myFormat = "dd.MM.yyyy HH:mm"
+                    val sdf = SimpleDateFormat(myFormat, Locale.US)
+                    deadline_deadline.setText(sdf.format(calDed.time))
+                }
 
         val dateSetListenerDate =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                calDate.set(Calendar.YEAR, year)
-                calDate.set(Calendar.MONTH, monthOfYear)
-                calDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    calDate.set(Calendar.YEAR, year)
+                    calDate.set(Calendar.MONTH, monthOfYear)
+                    calDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    calDate.set(Calendar.HOUR_OF_DAY, 12)
+                    calDate.set(Calendar.MINUTE, 0)
 
-                val myFormat = "dd.MM.yyyy"
-                val sdf = SimpleDateFormat(myFormat, Locale.US)
-                deadline_date.setText(sdf.format(calDate.time))
-            }
+                    val myFormat = "dd.MM.yyyy HH:mm"
+                    val sdf = SimpleDateFormat(myFormat, Locale.US)
+                    deadline_date.setText(sdf.format(calDate.time))
+                }
 
         deadline_deadline.setOnClickListener {
             DatePickerDialog(
-                this@DeadlineEditActivity, dateSetListenerDeadline,
-                calDed.get(Calendar.YEAR),
-                calDed.get(Calendar.MONTH),
-                calDed.get(Calendar.DAY_OF_MONTH)
+                    this@DeadlineEditActivity, dateSetListenerDeadline,
+                    calDed.get(Calendar.YEAR),
+                    calDed.get(Calendar.MONTH),
+                    calDed.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
 
         deadline_date.setOnClickListener {
             DatePickerDialog(
-                this@DeadlineEditActivity, dateSetListenerDate,
-                calDate.get(Calendar.YEAR),
-                calDate.get(Calendar.MONTH),
-                calDate.get(Calendar.DAY_OF_MONTH)
+                    this@DeadlineEditActivity, dateSetListenerDate,
+                    calDate.get(Calendar.YEAR),
+                    calDate.get(Calendar.MONTH),
+                    calDate.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
 
@@ -106,8 +132,8 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         val spinner: Spinner = findViewById(R.id.categories_spinner)
         var adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, userList.categories_names)
-        println(userList.categories_names.joinToString { e->e+" " }
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, userList.categories_names)
+        println(userList.categories_names.joinToString { e -> e + " " }
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
@@ -133,14 +159,16 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         deadlineToEdit.category = Category(deadline_category.text.toString())
         deadlineToEdit.category = Category(categories_spinner.selectedItem.toString())
         deadlineToEdit.notes = deadline_notes.text.toString()
-        deadlineToEdit.deadline = LocalDate.parse(
-            deadline_deadline.text.toString(),
-            DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        deadlineToEdit.deadline = LocalDateTime.parse(
+                deadline_deadline.text.toString(),
+                DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
         )
-        deadlineToEdit.date = LocalDate.parse(
-            deadline_date.text.toString(),
-            DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        deadlineToEdit.date = LocalDateTime.parse(
+                deadline_date.text.toString(),
+                DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
         )
+        println("date parsed to "+ deadlineToEdit.date.toString())
+        println("deadline parsed to "+ deadlineToEdit.deadline.toString())
         deadlineToEdit.importance = deadline_importance.rating.toInt()
         deadlineToEdit.isFinished = deadline_finished.isChecked
 

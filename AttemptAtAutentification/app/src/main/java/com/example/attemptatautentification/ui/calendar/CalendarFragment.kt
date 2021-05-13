@@ -25,6 +25,7 @@ import com.example.attemptatautentification.possumLib.User
 import com.example.attemptatautentification.ui.deadlineEdit.deadlineToEdit
 import com.example.attemptatautentification.ui.deadlineEdit.userToEdit
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -70,7 +71,7 @@ class CalendarFragment : Fragment() {
         val button = root.findViewById<View>(R.id.addDeadlineCalendar) as Button
         button.setOnClickListener {
             var new_deadline: Plan = Plan()
-            var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+            var ldate : LocalDateTime = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
             new_deadline.date = ldate
             new_deadline.deadline = ldate
             adapter?.notifyDataSetChanged()
@@ -94,7 +95,7 @@ class CalendarFragment : Fragment() {
     fun refresh(rvDeadlineList :RecyclerView, calendar: Calendar) {
         var ldate : LocalDate = calendar.time.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
 
-        adapter = CalendarAdapter(userCalendar.plans.filter { it.date.equals(ldate) } as ArrayList<Plan>)
+        adapter = CalendarAdapter(userCalendar.plans.filter { it.date.toLocalDate().equals(ldate) } as ArrayList<Plan>)
 
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.context)

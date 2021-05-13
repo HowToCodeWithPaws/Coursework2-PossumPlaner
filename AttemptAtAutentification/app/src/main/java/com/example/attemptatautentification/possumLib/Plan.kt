@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import java.io.Serializable
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,8 +22,8 @@ enum class possibleReminders {
 
 class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "новый план", isFinished_: Boolean = false,
                                                            category_: Category = Category(), notes_: String = "", importance_: Int = 1,
-                                                           date_: LocalDate = LocalDate.now(),
-                                                           deadline_: LocalDate = LocalDate.now(),
+                                                           date_: LocalDateTime = LocalDateTime.now(),
+                                                           deadline_: LocalDateTime = LocalDateTime.now(),
                                                            subplans_: ArrayList<Subplan> = ArrayList(),
                                                            repetition_: possibleRepetitions = possibleRepetitions.NONE,
                                                            putOff_: possiblePutOffs = possiblePutOffs.NONE,
@@ -121,20 +122,22 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
             if (value >= 0) field = value
         }
 
-    var date: LocalDate = LocalDate.now()
+    var date: LocalDateTime = LocalDateTime.now()
         get() {
             return field
         }
         set(value) {
             field = value
+            println( "setting date to "+field.toString())
         }
 
-    var deadline: LocalDate = LocalDate.now()
+    var deadline: LocalDateTime = LocalDateTime.now()
         get() {
             return field
         }
         set(value) {
             field = value
+            println( "setting deadline to "+field.toString())
         }
 
 
@@ -152,7 +155,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun isUrgent():Boolean{
-        return LocalDate.now().plusDays(2) >= deadline
+        return LocalDateTime.now().plusDays(2) >= deadline
     }
 
     init {
@@ -164,7 +167,6 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         repetition = repetition_
         reminder = reminder_
         subplans = subplans_
-        println("subs "+subplans.size)
         putOff = putOff_
         time = time_
         date = date_

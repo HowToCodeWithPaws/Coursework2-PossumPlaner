@@ -69,10 +69,10 @@ class CalendarAdapter(private val deadlines: ArrayList<Plan>)  :
             date.text = deadlineItem.date.toString()
             deadline.text = deadlineItem.deadline.toString()
             rating.rating = deadlineItem.importance.toFloat()
-            check.isChecked = deadlineItem.isFinished // todo удаление из списка?
+            check.isChecked = deadlineItem.isFinished
             check.setOnClickListener({deadlineItem.isFinished = check.isChecked})
-            var formattedDate = deadlineItem.date.format( DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-            var formattedDeadline = deadlineItem.deadline.format( DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            var formattedDate = deadlineItem.date.format( DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+            var formattedDeadline = deadlineItem.deadline.format( DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
             deadline.text = formattedDeadline
             date.text = formattedDate
         }

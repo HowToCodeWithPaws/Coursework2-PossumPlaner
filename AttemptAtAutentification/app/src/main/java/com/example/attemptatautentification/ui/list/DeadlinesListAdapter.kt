@@ -17,13 +17,13 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val mode: String) :
-    RecyclerView.Adapter<DeadlinesListAdapter.ListViewHolder>() {
+        RecyclerView.Adapter<DeadlinesListAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         var view: View
         if (mode == "light") {
             view =
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.deadline_item_light, parent, false)
+                    LayoutInflater.from(parent.context)
+                            .inflate(R.layout.deadline_item_light, parent, false)
             return ListViewHolder(view, "light")
         }
 
@@ -47,7 +47,7 @@ class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val m
     }
 
     open class ListViewHolder(itemView: View, private val mode: String) :
-        RecyclerView.ViewHolder(itemView) {
+            RecyclerView.ViewHolder(itemView) {
 
         @RequiresApi(Build.VERSION_CODES.O)
         open var plan: Plan = Plan()
@@ -64,17 +64,15 @@ class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val m
             plan = deadlineItem
             val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
             val name: TextView = itemView.findViewById(R.id.name)
+            name.text = deadlineItem.title
+            rating.rating = deadlineItem.importance.toFloat()
+
             val date: TextView = itemView.findViewById(R.id.date)
             val deadline: TextView = itemView.findViewById(R.id.deadline)
-            name.text = deadlineItem.title
-            date.text = deadlineItem.date.toString()
-            deadline.text = deadlineItem.deadline.toString()
             var formattedDate = deadlineItem.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             var formattedDeadline =
-                deadlineItem.deadline.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-            deadline.text = formattedDeadline
-            date.text = formattedDate
-            rating.rating = deadlineItem.importance.toFloat()
+                    deadlineItem.deadline.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+
 
             if (mode != "light") {
                 val notes: TextView = itemView.findViewById(R.id.notes)
@@ -82,9 +80,17 @@ class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val m
                 val check: CheckBox = itemView.findViewById(R.id.checkBox)
                 category.text = deadlineItem.category.name
                 notes.text = deadlineItem.notes
-                check.isChecked = deadlineItem.isFinished // todo удаление из списка?
+                check.isChecked = deadlineItem.isFinished
                 check.setOnClickListener({ deadlineItem.isFinished = check.isChecked })
+
+                formattedDate = deadlineItem.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+                formattedDeadline =
+                        deadlineItem.deadline.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+
             }
+
+            deadline.text = formattedDeadline
+            date.text = formattedDate
         }
 
 
