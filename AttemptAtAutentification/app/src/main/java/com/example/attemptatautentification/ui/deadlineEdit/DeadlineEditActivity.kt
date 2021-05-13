@@ -71,12 +71,28 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             adapter?.notifyDataSetChanged()
         }
 
-        val spinner: Spinner = findViewById(R.id.categories_spinner)
-        var adapter =
+        val spinnerCat: Spinner = findViewById(R.id.categories_spinner)
+        var adapterCat =
                 ArrayAdapter(this, android.R.layout.simple_spinner_item, userList.categories_names)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-        spinner.onItemSelectedListener = this
+        adapterCat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCat.adapter = adapterCat
+        spinnerCat.onItemSelectedListener = this
+
+        val putoffs = arrayListOf<String>("без переноса", "на следующий день", "на следующую неделю", "на следующий месяц", "на следующий год")
+        val spinnerPutOffs: Spinner = findViewById(R.id.putOff_spinner)
+        var adapterPutOffs =
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, putoffs)
+        adapterPutOffs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerPutOffs.adapter = adapterPutOffs
+        spinnerPutOffs.onItemSelectedListener = this
+
+        val repeat = arrayListOf<String>("не повторять", "каждый день", "каждую неделю", "каждый месяц", "каждый год")
+        val spinnerRepeat: Spinner = findViewById(R.id.repeat_spinner)
+        var adapterRepeat =
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, repeat)
+        adapterPutOffs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerRepeat.adapter = adapterRepeat
+        spinnerRepeat.onItemSelectedListener = this
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -132,6 +148,8 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         deadlineToEdit.category = Category(deadline_category.text.toString())
         deadlineToEdit.category = Category(categories_spinner.selectedItem.toString())
         deadlineToEdit.notes = deadline_notes.text.toString()
+        deadlineToEdit.setPutOff(putOff_spinner.selectedItem as String)
+        deadlineToEdit.setRepetition(repeat_spinner.selectedItem as String)
 
         try {
             deadlineToEdit.deadline = LocalDateTime.parse(
@@ -140,7 +158,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             )
         } catch (e: Exception) {
             deadlineToEdit.deadline = LocalDateTime.parse(
-                    deadline_deadline.text.toString()+" 23:59",
+                    deadline_deadline.text.toString() + " 23:59",
                     DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
             )
         }
@@ -152,7 +170,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             )
         } catch (e: Exception) {
             deadlineToEdit.date = LocalDateTime.parse(
-                    deadline_date.text.toString()+" 23:59",
+                    deadline_date.text.toString() + " 23:59",
                     DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
             )
         }

@@ -1,6 +1,8 @@
 package com.example.attemptatautentification
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,14 +22,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.GsonBuilder
 
 var passed_user = User()
+
 class BottomNavigationScreen : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bottom_navigation_screen)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
+
+        for (item: Int in passed_user.plans.size - 1 downTo 0 step 1) {
+            passed_user.plans[item].tryPutOff()
+        }
 
         userList = passed_user
         parentActivityList = this
@@ -53,7 +61,7 @@ class BottomNavigationScreen : AppCompatActivity() {
     }
 
     fun save() {
-        val sharedPref = this.getSharedPreferences("User_saved" ,MODE_PRIVATE) ?: return
+        val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             val data = passed_user
             val gson = GsonBuilder().create()

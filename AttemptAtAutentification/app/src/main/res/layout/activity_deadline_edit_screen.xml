@@ -34,10 +34,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintVertical_bias="0.002" />
 
     <EditText
         android:id="@+id/deadline_title"
@@ -62,8 +62,6 @@
         android:id="@+id/deadline_category"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -85,8 +83,8 @@
         android:id="@+id/categories_spinner"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
         android:layout_marginTop="2dp"
         android:fadingEdge="horizontal|vertical"
         app:layout_constraintStart_toEndOf="@id/deadline_category"
@@ -96,8 +94,6 @@
         android:id="@+id/notes_caption"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -119,8 +115,8 @@
         android:id="@+id/deadline_notes"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
         android:ellipsize="end"
         android:hint="@string/notes"
         android:textSize="16sp"
@@ -135,8 +131,6 @@
         android:id="@+id/deadline_caption"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -158,8 +152,8 @@
         android:id="@+id/deadline_deadline"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -181,8 +175,6 @@
         android:id="@+id/date_caption"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -204,8 +196,8 @@
         android:id="@+id/deadline_date"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -227,8 +219,6 @@
         android:id="@+id/deadline_importance_caption"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:clickable="false"
@@ -251,8 +241,8 @@
         style="@android:style/Widget.Material.RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:isIndicator="false"
@@ -287,7 +277,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/title_caption"
         app:layout_constraintTop_toBottomOf="@id/deadline_importance_caption"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.005" />
 
     <Button
         android:id="@+id/add_subplan"
@@ -306,15 +296,83 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_subplans"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:paddingBottom="?actionBarSize"
+        android:layout_width="403dp"
+        android:layout_height="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/rv_caption"
         app:layout_constraintTop_toBottomOf="@id/rv_caption"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/deadline_putOff"
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ellipsize="end"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="none"
+        android:text="@string/putOff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/title_caption"
+        app:layout_constraintTop_toBottomOf="@id/rv_subplans"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/putOff_spinner"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="2dp"
+        android:fadingEdge="horizontal|vertical"
+        app:layout_constraintStart_toEndOf="@id/deadline_putOff"
+        app:layout_constraintTop_toTopOf="@id/deadline_putOff" />
+
+    <EditText
+        android:id="@+id/deadline_repeat"
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ellipsize="end"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="none"
+        android:text="@string/repeat"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/title_caption"
+        app:layout_constraintTop_toBottomOf="@id/deadline_putOff"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/repeat_spinner"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="2dp"
+        android:fadingEdge="horizontal|vertical"
+        app:layout_constraintStart_toEndOf="@id/deadline_repeat"
+        app:layout_constraintTop_toTopOf="@id/deadline_repeat" />
+
 
     <Button
         android:id="@+id/deadline_save"
@@ -327,10 +385,10 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintHorizontal_bias="0.767"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deadline_importance"
-        app:layout_constraintVertical_bias="0.806" />
+        app:layout_constraintTop_toBottomOf="@id/deadline_repeat"
+        app:layout_constraintVertical_bias="0.948" />
 
     <Button
         android:id="@+id/deadline_delete"
@@ -343,9 +401,9 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deadline_importance"
-        app:layout_constraintVertical_bias="0.989" />
+        app:layout_constraintTop_toBottomOf="@id/repeat_spinner"
+        app:layout_constraintVertical_bias="0.945" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

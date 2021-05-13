@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun exampleUser() {
         val clist: ArrayList<Category> = arrayListOf()
-clist.add(Category("work!!!"))
+        clist.add(Category("учебное"))
         val new_list: ArrayList<Plan> = arrayListOf<Plan>()
         new_user = User("Dead", "token?", new_list, clist)
         new_user.plans.add(Plan("первый план", false, clist[0], "", 2, LocalDateTime.of(2021, 5, 4, 12, 12)))
@@ -140,23 +140,27 @@ clist.add(Category("work!!!"))
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getSaved(view: View) {
-//        val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
-//        val gson = GsonBuilder().create()
-//        try {
-//            new_user = gson.fromJson(sharedPref.getString("User", ""), User::class.java)
-//            println("входим " + sharedPref.getString("User", ""))
-//            println("user  " + new_user.toString())
-//            //   if (!visitedSecond) {
-        exampleUser()
-        passed_user = new_user
-        val randomIntent = Intent(this, BottomNavigationScreen::class.java)
-        startActivity(randomIntent)
-        visitedSecond = true
-        //}
-        //  } catch (e: NullPointerException) {
-        //    updateUI("Не получилось получить сохраненные данные")
-        //   println(e.stackTrace)
-        //}
+        val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
+        val gson = GsonBuilder().create()
+        try {
+            new_user = gson.fromJson(sharedPref.getString("User", ""), User::class.java)
+            println("входим " + sharedPref.getString("User", ""))
+            println("user  " + new_user.toString())
+            if (!visitedSecond) {
+                passed_user = new_user
+                val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+                startActivity(randomIntent)
+                visitedSecond = true
+            }
+        } catch (e: NullPointerException) {
+            updateUI("Не получилось получить сохраненные данные")
+            println(e.stackTrace)
+            exampleUser()
+            passed_user = new_user
+            val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+            startActivity(randomIntent)
+            visitedSecond = true
+        }
     }
 
     fun save() {

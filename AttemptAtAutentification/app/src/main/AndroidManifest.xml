@@ -22,7 +22,7 @@
             android:label="План" />
         <activity
             android:name=".MainActivity"
-            android:label="Добро пожаловать!">
+            android:label="PossumPlanner">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

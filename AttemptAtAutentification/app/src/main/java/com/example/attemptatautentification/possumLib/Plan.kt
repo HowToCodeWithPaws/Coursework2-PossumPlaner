@@ -9,11 +9,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 enum class possibleRepetitions {
-    NONE, DAILY, WEEKLY, MONTHLY ///TODO рандомно на выбор пользователя
+    NONE, DAILY, WEEKLY, MONTHLY, EACHYEAR
 }
 
 enum class possiblePutOffs {
-    NONE, NEXTDAY, NEXTWEEK, NEXTMONTH
+    NONE, NEXTDAY, NEXTWEEK, NEXTMONTH, NEXTYEAR
 }
 
 enum class possibleReminders {
@@ -34,16 +34,17 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         get() {
             return field
         }
+        @RequiresApi(Build.VERSION_CODES.O)
         set(value) {
             if (value == !field) {
                 field = value
+                if (value) {
+                    tryRepeat()
+                }
             }
+
         }
 
-    //??
-    fun changeFinished() {
-        isFinished = !isFinished
-    }
 
     var title: String = "новый план"
         get() {
@@ -73,6 +74,20 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
             }
         }
 
+    fun setRepetition(value: String) {
+        if (value == "каждый день") {
+            repetition = possibleRepetitions.DAILY
+        } else if (value == "каждую неделю") {
+            repetition = possibleRepetitions.WEEKLY
+        } else if (value == "каждый месяц") {
+            repetition = possibleRepetitions.MONTHLY
+        } else if (value == "каждый год") {
+            repetition = possibleRepetitions.EACHYEAR
+        } else {
+            repetition = possibleRepetitions.NONE
+        }
+    }
+
     var repetition: possibleRepetitions = possibleRepetitions.NONE
         get() {
             return field
@@ -87,7 +102,6 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         }
         set(value) {
             field = value
-            println("subs "+subplans.size)
         }
 
     fun addSubplan(subplan: Subplan) {
@@ -96,6 +110,20 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
 
     fun deleteSubplan(subplan: Subplan) {
         subplans.remove(subplan)
+    }
+
+    fun setPutOff(value: String) {
+        if (value == "на следующий день") {
+            putOff = possiblePutOffs.NEXTDAY
+        } else if (value == "на следующую неделю") {
+            putOff = possiblePutOffs.NEXTWEEK
+        } else if (value == "на следующий месяц") {
+            putOff = possiblePutOffs.NEXTMONTH
+        } else if (value == "на следующий год") {
+            putOff = possiblePutOffs.NEXTYEAR
+        } else {
+            putOff = possiblePutOffs.NONE
+        }
     }
 
     var putOff: possiblePutOffs = possiblePutOffs.NONE
@@ -128,7 +156,6 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         }
         set(value) {
             field = value
-            println( "setting date to "+field.toString())
         }
 
     var deadline: LocalDateTime = LocalDateTime.now()
@@ -137,7 +164,6 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         }
         set(value) {
             field = value
-            println( "setting deadline to "+field.toString())
         }
 
 
@@ -149,12 +175,53 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
             field = value
         }
 
-    override fun toString(): String {
-        return "category: " + category.name + "\n" + "importance " + importance.toString() + "\ndate: " + date.toString()+ "\ndeadline: " + deadline.toString() ;
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun isOverdue(): Boolean {
+        return !isFinished && LocalDateTime.now().isAfter(date)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun isUrgent():Boolean{
+    fun tryPutOff() {
+        if (isOverdue()) {
+            if (putOff == possiblePutOffs.NEXTDAY) {
+                date = date.plusDays(1)
+            } else if (putOff == possiblePutOffs.NEXTWEEK) {
+                date = date.plusWeeks(1)
+            } else if (putOff == possiblePutOffs.NEXTMONTH) {
+                date = date.plusMonths(1)
+            } else if (putOff == possiblePutOffs.NEXTYEAR) {
+                date = date.plusYears(1)
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun tryRepeat() {
+        if (repetition == possibleRepetitions.DAILY) {
+            isFinished = false
+            date = date.plusDays(1)
+            deadline = deadline.plusDays(1)
+        } else if (repetition == possibleRepetitions.WEEKLY) {
+            isFinished = false
+            date = date.plusWeeks(1)
+            deadline = deadline.plusWeeks(1)
+        } else if (repetition == possibleRepetitions.MONTHLY) {
+            isFinished = false
+            date = date.plusMonths(1)
+            deadline = deadline.plusMonths(1)
+        } else if (repetition == possibleRepetitions.EACHYEAR) {
+            isFinished = false
+            date = date.plusYears(1)
+            deadline = deadline.plusYears(1)
+        }
+    }
+
+    override fun toString(): String {
+        return "category: " + category.name + "\n" + "importance " + importance.toString() + "\ndate: " + date.toString() + "\ndeadline: " + deadline.toString();
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun isUrgent(): Boolean {
         return LocalDateTime.now().plusDays(2) >= deadline
     }
 
