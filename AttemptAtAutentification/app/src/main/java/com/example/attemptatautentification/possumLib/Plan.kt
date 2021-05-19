@@ -105,14 +105,6 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
             field = value
         }
 
-//    fun addSubplan(subplan: Subplan) {
-//        subplans.add(subplan)
-//    }
-//
-//    fun deleteSubplan(subplan: Subplan) {
-//        subplans.remove(subplan)
-//    }
-
     fun setPutOff(value: String) {
         if (value == "на следующий день") {
             putOff = possiblePutOffs.NEXTDAY

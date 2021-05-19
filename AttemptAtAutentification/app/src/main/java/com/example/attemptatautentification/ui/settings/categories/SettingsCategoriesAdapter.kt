@@ -15,8 +15,8 @@ import com.example.attemptatautentification.ui.categoryEdit.categoryToEdit
 import com.example.attemptatautentification.ui.categoryEdit.userWithCategoryToEdit
 import java.util.ArrayList
 
-class SettingsCategoryAdapter(private val categories: ArrayList<Category>) :
-    RecyclerView.Adapter<SettingsCategoryAdapter.SettingsCategoryViewHolder>()  {
+class SettingsCategoriesAdapter(private val categories: ArrayList<Category>) :
+    RecyclerView.Adapter<SettingsCategoriesAdapter.SettingsCategoryViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsCategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)

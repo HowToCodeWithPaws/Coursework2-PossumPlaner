@@ -32,14 +32,6 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
             field = value
         }
 
-//    fun addPlan(plan: Plan) {
-//        plans.add(plan)
-//    }
-//
-//    fun deletePlan(plan: Plan) {
-//        plans.remove(plan)
-//    }
-
     var categories: ArrayList<Category> = ArrayList()
         get() {
             return field
@@ -66,11 +58,6 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
     }
 
     fun deleteCategory(category: Category) {
-    //    for (p in plans){
-    //        if (p.category.name.equals(category.name)){todo ???
-    //            plans.remove(p)
-     //       }
-    //    }
         categories.remove(category)
         categories_names.remove(category.name)
     }

@@ -67,7 +67,7 @@ class GraphFragment : Fragment() {
 
         val rv_NUNI: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_notUrgentNotImportant)
         adapterNUNI = DeadlinesListAdapter(userGraph.plans.filter { !it.isUrgent() && it.importance <= 2 && !it.isFinished } as ArrayList<Plan>, "light")
-        rv_NUNI.adapter = adapterUI
+        rv_NUNI.adapter = adapterNUNI
         rv_NUNI.layoutManager = LinearLayoutManager(this.context)
 
         return root

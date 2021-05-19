@@ -2,8 +2,6 @@ package com.example.attemptatautentification.ui.settings.categories
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.attemptatautentification.BottomNavigationScreen
 import com.example.attemptatautentification.R
@@ -17,7 +15,7 @@ var parentSettingsCategories: BottomNavigationScreen = BottomNavigationScreen()
 
 class SettingsCategoriesScreen : AppCompatActivity() {
 
-    var adapter: SettingsCategoryAdapter? = null
+    var adapter: SettingsCategoriesAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +24,7 @@ class SettingsCategoriesScreen : AppCompatActivity() {
 
         setContentView(R.layout.activity_settings_categories_screen)
 
-        adapter = SettingsCategoryAdapter(userWithCategories.categories)
+        adapter = SettingsCategoriesAdapter(userWithCategories.categories)
         rv_categories.adapter = adapter
         rv_categories.layoutManager = LinearLayoutManager(this.applicationContext)
 
