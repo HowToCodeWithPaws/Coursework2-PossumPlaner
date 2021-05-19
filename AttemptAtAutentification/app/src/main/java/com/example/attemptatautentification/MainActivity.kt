@@ -1,11 +1,8 @@
 package com.example.attemptatautentification
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import com.example.attemptatautentification.auth.AuthManager;
-
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -13,24 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.attemptatautentification.auth.Validator
 import com.example.attemptatautentification.possumLib.*
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 import com.google.firebase.auth.FirebaseUser
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONStringer
 import java.lang.StringBuilder
-import java.time.LocalDate
 import java.time.LocalDateTime
 import kotlin.collections.ArrayList
-import kotlin.reflect.typeOf
 
 class MainActivity : AppCompatActivity() {
-    var login_: String = ""
-    var password_: String = ""
-    var authManager: AuthManager = AuthManager()
-    var visitedSecond: Boolean = false
-    var new_user: User = User()
+    private var login_: String = ""
+    private var password_: String = ""
+    private var authManager: AuthManager = AuthManager()
+    private var visitedSecond: Boolean = false
+    private var new_user: User = User()
 
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
@@ -98,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     //дефолтно обновляем интерфейс для юзера
     @RequiresApi(Build.VERSION_CODES.O)
-    fun updateUI(user: FirebaseUser?) {
+    private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             //       if (new_user.name.equals("new user")) {
             exampleUser()
@@ -124,13 +116,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     //дефолтно обновляем интерфейс для юзера
-    fun updateUI(warning: String) {
+    private fun updateUI(warning: String) {
         input.text = warning
         input.refreshDrawableState()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun exampleUser() {
+    private fun exampleUser() {
         val clist: ArrayList<Category> = arrayListOf()
         clist.add(Category("учебное"))
         val new_list: ArrayList<Plan> = arrayListOf<Plan>()
@@ -142,7 +134,7 @@ class MainActivity : AppCompatActivity() {
     fun getSaved(view: View) {
         val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
         val gson = GsonBuilder().create()
-        try {
+     //   try {
             new_user = gson.fromJson(sharedPref.getString("User", ""), User::class.java)
             println("входим " + sharedPref.getString("User", ""))
             println("user  " + new_user.toString())
@@ -152,18 +144,18 @@ class MainActivity : AppCompatActivity() {
                 startActivity(randomIntent)
                 visitedSecond = true
             }
-        } catch (e: NullPointerException) {
-            updateUI("Не получилось получить сохраненные данные")
-            println(e.stackTrace)
-            exampleUser()
-            passed_user = new_user
-            val randomIntent = Intent(this, BottomNavigationScreen::class.java)
-            startActivity(randomIntent)
-            visitedSecond = true
-        }
+    //    } catch (e: NullPointerException) {
+//            updateUI("Не получилось получить сохраненные данные")
+//            println(e.stackTrace)
+//            exampleUser()
+//            passed_user = new_user
+//            val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+//            startActivity(randomIntent)
+//            visitedSecond = true
+     //   }
     }
 
-    fun save() {
+    private fun save() {
         val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             val data = new_user

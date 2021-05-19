@@ -15,8 +15,7 @@ import kotlinx.android.synthetic.main.activity_settings_categories_screen.*
 var userWithCategories: User = User()
 var parentSettingsCategories: BottomNavigationScreen = BottomNavigationScreen()
 
-class SettingsCategoriesScreen : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-
+class SettingsCategoriesScreen : AppCompatActivity() {
 
     var adapter: SettingsCategoryAdapter? = null
 
@@ -27,7 +26,7 @@ class SettingsCategoriesScreen : AppCompatActivity(), AdapterView.OnItemSelected
 
         setContentView(R.layout.activity_settings_categories_screen)
 
-       adapter = SettingsCategoryAdapter(userWithCategories.categories)
+        adapter = SettingsCategoryAdapter(userWithCategories.categories)
         rv_categories.adapter = adapter
         rv_categories.layoutManager = LinearLayoutManager(this.applicationContext)
 
@@ -37,12 +36,6 @@ class SettingsCategoriesScreen : AppCompatActivity(), AdapterView.OnItemSelected
             userWithCategories.addCategory(new_category)
             adapter?.notifyDataSetChanged()
         }
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>) {
     }
 
     fun save() {

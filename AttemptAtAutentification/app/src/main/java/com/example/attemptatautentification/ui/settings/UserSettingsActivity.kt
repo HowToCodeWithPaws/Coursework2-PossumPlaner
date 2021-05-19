@@ -24,4 +24,12 @@ class UserSettingsActivity : AppCompatActivity() {
         }
         Toast.makeText(this, "данные удалены", Toast.LENGTH_SHORT).show()
     }
+
+    fun logInWithNewAccount(view: View){
+        //todo?
+    }
+
+    fun bindNewEmail(view: View){
+        //todo?
+    }
 }

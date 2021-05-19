@@ -27,7 +27,6 @@ class ListFragment : Fragment(),  AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
-
     private var listList = ArrayList<ListForRV>()
     private lateinit var nestedListAdapter: NestedListAdapter
 
@@ -63,7 +62,7 @@ class ListFragment : Fragment(),  AdapterView.OnItemSelectedListener {
         return binding.root
     }
 
-    fun openDeadlineScreen(deadline: Plan) {
+    private fun openDeadlineScreen(deadline: Plan) {
         deadlineToEdit = deadline
         userToEdit = userList
         val intent = Intent(parentActivityList, DeadlineEditActivity::class.java)

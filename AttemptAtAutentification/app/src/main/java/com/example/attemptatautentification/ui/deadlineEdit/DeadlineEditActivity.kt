@@ -35,7 +35,7 @@ var userToEdit: User = User()
 
 class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
-    var adapter: DeadlineEditAdapter? = null
+    private var adapter: DeadlineEditAdapter? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +96,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun showDateTimePicker(textView: TextView) {
+    private fun showDateTimePicker(textView: TextView) {
         var currentDate = Calendar.getInstance()
         val setListenerDate =
                 DatePickerDialog.OnDateSetListener { viewDate, year, monthOfYear, dayOfMonth ->
@@ -136,7 +136,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun refresh(rvDeadlineList: RecyclerView) {
+    private fun refresh(rvDeadlineList: RecyclerView) {
         adapter = DeadlineEditAdapter(deadlineToEdit.subplans)
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.applicationContext)
@@ -188,7 +188,7 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         this.finish()
     }
 
-    fun save() {
+    private fun save() {
         val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             val data = userToEdit

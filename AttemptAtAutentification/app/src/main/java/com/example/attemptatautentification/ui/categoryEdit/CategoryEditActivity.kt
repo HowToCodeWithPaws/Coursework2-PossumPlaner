@@ -33,7 +33,7 @@ class CategoryEditActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun refresh(rvList: RecyclerView) {
+    private fun refresh(rvList: RecyclerView) {
         adapter = CategoryEditAdapter( userWithCategories.plans.filter { it.category.name.equals(
             categoryToEdit.name) } as ArrayList<Plan> )
         rvList.adapter = adapter

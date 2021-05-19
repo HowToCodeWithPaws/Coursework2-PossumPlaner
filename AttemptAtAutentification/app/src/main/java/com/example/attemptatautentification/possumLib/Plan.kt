@@ -1,5 +1,7 @@
 package com.example.attemptatautentification.possumLib
 
+
+
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.io.Serializable
@@ -7,7 +9,6 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
-
 enum class possibleRepetitions {
     NONE, DAILY, WEEKLY, MONTHLY, EACHYEAR
 }
@@ -104,13 +105,13 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
             field = value
         }
 
-    fun addSubplan(subplan: Subplan) {
-        subplans.add(subplan)
-    }
-
-    fun deleteSubplan(subplan: Subplan) {
-        subplans.remove(subplan)
-    }
+//    fun addSubplan(subplan: Subplan) {
+//        subplans.add(subplan)
+//    }
+//
+//    fun deleteSubplan(subplan: Subplan) {
+//        subplans.remove(subplan)
+//    }
 
     fun setPutOff(value: String) {
         if (value == "на следующий день") {
@@ -240,4 +241,3 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
         deadline = deadline_
     }
 }
-

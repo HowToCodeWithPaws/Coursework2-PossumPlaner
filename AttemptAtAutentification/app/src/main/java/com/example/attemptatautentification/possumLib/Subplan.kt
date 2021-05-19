@@ -2,7 +2,7 @@ package com.example.attemptatautentification.possumLib
 
 import java.io.Serializable
 
-class Subplan(title_: String = "new subplan", isFinished_: Boolean = false) : Serializable {
+class Subplan(title_: String = "новый подплан", isFinished_: Boolean = false) : Serializable {
 
      var isFinished: Boolean = false
         get() {
@@ -14,7 +14,7 @@ class Subplan(title_: String = "new subplan", isFinished_: Boolean = false) : Se
             }
         }
 
-     var title: String = "new subplan"
+     var title: String = "новый подплан"
         get() {
             return field
         }

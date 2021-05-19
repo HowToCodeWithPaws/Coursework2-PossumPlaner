@@ -23,6 +23,7 @@ import java.util.ArrayList
 class CategoryEditAdapter(private val plans: ArrayList<Plan>) :
     RecyclerView.Adapter<CategoryEditAdapter.CategoryEditViewHolder>(){
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryEditViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.deadline_item, parent, false)
         return CategoryEditViewHolder(view)
@@ -38,10 +39,11 @@ class CategoryEditAdapter(private val plans: ArrayList<Plan>) :
         return plans.size
     }
 
-    fun getItem(position: Int): Plan {
+    private fun getItem(position: Int): Plan {
         return plans[position]
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     class CategoryEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
@@ -54,7 +56,7 @@ class CategoryEditAdapter(private val plans: ArrayList<Plan>) :
 
 
         @RequiresApi(Build.VERSION_CODES.O)
-        var plan: Plan = Plan()
+       private var plan: Plan = Plan()
 
         init {
             itemView.setOnClickListener {
@@ -82,7 +84,7 @@ class CategoryEditAdapter(private val plans: ArrayList<Plan>) :
         }
 
 
-        fun openDeadlineScreenEdit(deadline: Plan) {
+        private fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
             userToEdit = userSettings
             val intent = Intent(parentActivitySettings, DeadlineEditActivity::class.java)

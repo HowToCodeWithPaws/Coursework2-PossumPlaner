@@ -32,13 +32,13 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
             field = value
         }
 
-    fun addPlan(plan: Plan) {
-        plans.add(plan)
-    }
-
-    fun deletePlan(plan: Plan) {
-        plans.remove(plan)
-    }
+//    fun addPlan(plan: Plan) {
+//        plans.add(plan)
+//    }
+//
+//    fun deletePlan(plan: Plan) {
+//        plans.remove(plan)
+//    }
 
     var categories: ArrayList<Category> = ArrayList()
         get() {

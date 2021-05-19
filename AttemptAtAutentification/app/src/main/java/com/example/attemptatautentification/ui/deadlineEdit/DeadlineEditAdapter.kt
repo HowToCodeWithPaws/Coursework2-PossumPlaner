@@ -32,7 +32,7 @@ class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>) :
         return sublpans.size
     }
 
-    fun getItem(position: Int): Subplan {
+    private fun getItem(position: Int): Subplan {
         return sublpans[position]
     }
 
@@ -43,7 +43,7 @@ class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>) :
 
 
         @RequiresApi(Build.VERSION_CODES.O)
-        var subplan_note: Subplan = Subplan()
+        private var subplan_note: Subplan = Subplan()
 
 
         @RequiresApi(Build.VERSION_CODES.O)

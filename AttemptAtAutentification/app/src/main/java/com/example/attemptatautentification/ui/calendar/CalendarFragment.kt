@@ -31,7 +31,6 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 var userCalendar: User = User()
-
 var parentActivityCalendar: BottomNavigationScreen = BottomNavigationScreen()
 
 

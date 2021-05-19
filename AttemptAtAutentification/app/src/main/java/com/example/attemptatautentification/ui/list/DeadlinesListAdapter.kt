@@ -42,15 +42,15 @@ class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val m
         return deadlines.size
     }
 
-    fun getItem(position: Int): Plan {
+    private fun getItem(position: Int): Plan {
         return deadlines[position];
     }
 
-    open class ListViewHolder(itemView: View, private val mode: String) :
+     class ListViewHolder(itemView: View, private val mode: String) :
             RecyclerView.ViewHolder(itemView) {
 
         @RequiresApi(Build.VERSION_CODES.O)
-        open var plan: Plan = Plan()
+         var plan: Plan = Plan()
 
         init {
             itemView.setOnClickListener {
@@ -59,7 +59,7 @@ class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val m
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        open fun bind(deadlineItem: Plan) {
+         fun bind(deadlineItem: Plan) {
 
             plan = deadlineItem
             val rating: RatingBar = itemView.findViewById(R.id.ratingBar)
@@ -94,7 +94,7 @@ class DeadlinesListAdapter(private val deadlines: ArrayList<Plan>, private val m
         }
 
 
-        open fun openDeadlineScreenEdit(deadline: Plan) {
+         fun openDeadlineScreenEdit(deadline: Plan) {
             deadlineToEdit = deadline
             userToEdit = userList
             val intent = Intent(parentActivityList, DeadlineEditActivity::class.java)
