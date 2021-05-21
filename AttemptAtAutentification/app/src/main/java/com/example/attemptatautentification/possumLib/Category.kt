@@ -8,6 +8,9 @@ import androidx.annotation.RequiresApi
 import java.io.Serializable
 
 class Category constructor(name_: String = "новая категория", colour_: Int = 0) : Serializable/*, Parcelable*/ {
+    companion object{
+        var countId = 0;
+    }
     var name: String = "новая категория"
         get() {
             return field
@@ -20,7 +23,7 @@ class Category constructor(name_: String = "новая категория", colo
             }
         }
 
-    var colour: Int = 0
+    var colour: Int = countId++
         get() {
             return field
         }

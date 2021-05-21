@@ -21,6 +21,7 @@ enum class possibleReminders {
     NONE, H3BEFORE, H12BEFORE, H24BEFORE, H72BEFORE
 }
 
+
 class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "новый план", isFinished_: Boolean = false,
                                                            category_: Category = Category(), notes_: String = "", importance_: Int = 1,
                                                            date_: LocalDateTime = LocalDateTime.now(),
@@ -30,7 +31,13 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
                                                            putOff_: possiblePutOffs = possiblePutOffs.NONE,
                                                            reminder_: possibleReminders = possibleReminders.NONE,
                                                            time_: Double = 0.0) : Serializable {
+    companion object{
+        public var counterId: Int = 0;
+    }
 
+    var id: Int
+    get() {return field
+    }
     var isFinished: Boolean = false
         get() {
             return field
@@ -219,6 +226,7 @@ class Plan @RequiresApi(Build.VERSION_CODES.O) constructor(title_: String = "н�
     }
 
     init {
+        id = counterId++
         isFinished = isFinished_
         title = title_
         notes = notes_

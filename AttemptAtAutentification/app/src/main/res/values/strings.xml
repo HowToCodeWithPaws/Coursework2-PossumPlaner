@@ -22,7 +22,7 @@
     <string name="title">название</string>
     <string name="password">пароль</string>
     <string name="username">имя пользователя</string>
-    <string name="sign_in">войти в аккаунт</string>
+    <string name="sign_in">Войти с помощью Google</string>
     <string name="log_in">зарегистрироваться</string>
     <string name="notes">описание</string>
     <string name="importance_caption">важность</string>
@@ -35,7 +35,7 @@
     <string name="delete">удалить</string>
     <string name="read">прочитать</string>
     <string name="write">записать</string>
-    <string name="enter_saved">войти в локальный аккаунт</string>
+    <string name="enter_saved">Войти в локальный аккаунт</string>
     <string name="plans_in_category">планы в категории</string>
     <string name="urgent">срочное</string>
     <string name="not_urgent">не срочное</string>
@@ -51,4 +51,5 @@
     <string name="repeat">повторение</string>
     <string name="welcome">Добро пожаловать!</string>
     <string name="deleteLocal">очистить локально сохраненные данные</string>
+    <string name="google">Войти с помощью Google</string>
 </resources>
