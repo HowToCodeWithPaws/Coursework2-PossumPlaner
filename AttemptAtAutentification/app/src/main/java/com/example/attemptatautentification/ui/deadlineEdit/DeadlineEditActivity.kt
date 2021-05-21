@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.attemptatautentification.MainActivity
 import com.example.attemptatautentification.R
 import com.example.attemptatautentification.passed_user
 import com.example.attemptatautentification.possumLib.Category
@@ -178,17 +179,20 @@ class DeadlineEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         deadlineToEdit.importance = deadline_importance.rating.toInt()
         deadlineToEdit.isFinished = deadline_finished.isChecked
 
+        MainActivity.dateManager.changePlan(deadlineToEdit)
         this.finish()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun delete(view: View) {
         userToEdit.plans.remove(deadlineToEdit)
+        MainActivity.dateManager.deletePlan(deadlineToEdit)
 
         this.finish()
     }
 
     fun save() {
+        MainActivity.dateManager.upload(userToEdit)
         val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             val data = userToEdit

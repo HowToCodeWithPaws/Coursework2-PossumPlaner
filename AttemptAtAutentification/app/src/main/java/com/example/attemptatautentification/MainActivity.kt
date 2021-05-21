@@ -1,49 +1,63 @@
 package com.example.attemptatautentification
 
-import android.content.Context
+import android.R.attr
+import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
-import com.example.attemptatautentification.auth.AuthManager;
-
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.attemptatautentification.auth.Validator
-import com.example.attemptatautentification.possumLib.*
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
+import com.example.attemptatautentification.managerLib.AuthManager
+import com.example.attemptatautentification.managerLib.DatebaseManager
+import com.example.attemptatautentification.managerLib.NotificationManager
+import com.example.attemptatautentification.possumLib.Category
+import com.example.attemptatautentification.possumLib.Plan
+import com.example.attemptatautentification.possumLib.User
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.SignInButton
 import com.google.firebase.auth.FirebaseUser
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONStringer
-import java.lang.StringBuilder
-import java.time.LocalDate
 import java.time.LocalDateTime
-import kotlin.collections.ArrayList
-import kotlin.reflect.typeOf
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     var login_: String = ""
     var password_: String = ""
-    var authManager: AuthManager = AuthManager()
+    companion object{
+        lateinit var authManager: AuthManager
+        lateinit var dateManager: DatebaseManager
+        lateinit var notifManager: NotificationManager
+    }
+
+    lateinit var a: Objects
     var visitedSecond: Boolean = false
     var new_user: User = User()
+
+
+    var authed: Boolean = false
 
 //    @RequiresApi(Build.VERSION_CODES.O)
 //    val file: File = File(Paths.get("").toAbsolutePath().toString() + "info.txt")
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //это подрубается лайаут
         setContentView(R.layout.activity_main)
         //всё видненько
-        login.isVisible = true
-        password.isVisible = true
+        //login.isVisible = true
+       // password.isVisible = true
         signIn.isVisible = true
-        logIn.isVisible = true
+        //logIn.isVisible = true
+        authManager = AuthManager(this)
+        dateManager = DatebaseManager(this)
+        signIn.setOnClickListener(View.OnClickListener { SignIn() })
+
     }
 
     //при запуске приложеньки
@@ -57,42 +71,31 @@ class MainActivity : AppCompatActivity() {
     //Кнопочка зарегаться
     @RequiresApi(Build.VERSION_CODES.O)
     fun LogIn(view: View) {
-        visitedSecond = false
+        /*visitedSecond = false
         login_ = login.text.toString()
-        password_ = password.text.toString()
+        password_ = password.text.toString()*/
+        SignIn(view)
 
-        if (!Validator.isEmail(login_)) {
-            updateUI("Это не email!")
-        } else if (!Validator.strongEnoughPassword(password_)) {
-            updateUI("Пароль слишком слабый!")
-        } else {
-            authManager.createNewAccount(login_, password_)
-
-            if (authManager.currentUser?.email.equals(login_)) {
-                updateUI(authManager.currentUser)
-            } else {
-                updateUI("Не получилось создать аккаунт")
-            }
-        }
     }
+
 
     //Кнопочка войти
     @RequiresApi(Build.VERSION_CODES.O)
     fun SignIn(view: View) {
-        visitedSecond = false
-        login_ = login.text.toString()
-        password_ = password.text.toString()
 
-        if (!login_.isEmpty() && !password_.isEmpty()) {
-            authManager.signIn(login_, password_)
-            if (authManager.currentUser?.email.equals(login_)) {
-                updateUI(authManager.currentUser)
-            } else {
-                updateUI("Не получилось войти в аккаунт")
-            }
-        } else {
-            updateUI("Логин и пароль не должны быть пустыми")
-        }
+        authManager.signIn()
+        authManager.existingGoogleAccount()?.let { updateUI(it) }
+
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun SignIn() {
+
+        authManager.signIn()
+        authManager.existingGoogleAccount()?.let { updateUI(it) }
+
+
 
     }
 
@@ -106,10 +109,8 @@ class MainActivity : AppCompatActivity() {
             ///TODO USER FROM SERVER
 
 
-            if (user != null) {
-                input.text = StringBuilder().append("Вы авторизированы, ваш email: ").append(user.email)
-                        .toString()
-            }
+            input.text = StringBuilder().append("Вы авторизированы, ваш email: ").append(user.email)
+                    .toString()
 
             if (!visitedSecond) {
                 passed_user = new_user
@@ -173,10 +174,75 @@ class MainActivity : AppCompatActivity() {
             println("user  " + new_user.toString())
             apply()
         }
+
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == 1) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            authManager.handleSignInResult(task)
+        }
     }
 
     override fun onPause() {
         save()
+        dateManager.upload(new_user)
         super.onPause()
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun updateUI(account: GoogleSignInAccount) {
+        input.text = account.email
+        input.refreshDrawableState()
+
+        dateManager.getUser(account.idToken)
+        if (!dateManager.okay()){
+            val sharedPref = this.getSharedPreferences("User_saved", MODE_PRIVATE) ?: return
+            val gson = GsonBuilder().create()
+            try {
+                new_user = gson.fromJson(sharedPref.getString("User", ""), User::class.java)
+                new_user.token = account.idToken.toString();
+                println("входим " + sharedPref.getString("User", ""))
+                println("user  " + new_user.toString())
+                if (!visitedSecond) {
+                    passed_user = new_user
+                    val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+                    startActivity(randomIntent)
+                    visitedSecond = true
+                }
+            } catch (e: NullPointerException) {
+                updateUI("Не получилось получить сохраненные данные")
+                println(e.stackTrace)
+                exampleUser()
+                passed_user = new_user
+                val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+                startActivity(randomIntent)
+                visitedSecond = true
+            }
+
+        }
+        else{
+            dateManager.newUser(account.idToken, account.givenName)
+            new_user = dateManager.getUser(account.idToken)
+
+            val randomIntent = Intent(this, BottomNavigationScreen::class.java)
+            startActivity(randomIntent)
+            visitedSecond = true
+        }
+
+    }
+
 }
+
+
+

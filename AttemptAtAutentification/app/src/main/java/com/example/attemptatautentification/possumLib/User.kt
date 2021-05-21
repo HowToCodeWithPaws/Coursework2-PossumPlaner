@@ -14,14 +14,12 @@ class User(name_: String = "new user", token_: String = "token", plans_: ArrayLi
             }
         }
 
-    private var token: String = "token"
+    var token: String = "token"
         get() {
             return field
         }
         set(value) {
-            if (value.length in 1..9) {
                 field = value
-            }
         }
 
     var plans: ArrayList<Plan> = ArrayList()
