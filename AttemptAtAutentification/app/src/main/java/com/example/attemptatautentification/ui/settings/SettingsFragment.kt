@@ -28,7 +28,8 @@ class SettingsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
         val rvDeadlineList: RecyclerView = root.findViewById<RecyclerView>(R.id.rv_settings)
-        var arr :ArrayList<String> = arrayListOf("категории","уведомления","учетная запись","интерфейс","дополнительные функции")
+       // var arr :ArrayList<String> = arrayListOf("категории","уведомления","учетная запись","интерфейс","дополнительные функции")
+        var arr :ArrayList<String> = arrayListOf("категории","учетная запись")
         adapter = SettingsAdapter(arr)
         rvDeadlineList.adapter = adapter
         rvDeadlineList.layoutManager = LinearLayoutManager(this.context)
