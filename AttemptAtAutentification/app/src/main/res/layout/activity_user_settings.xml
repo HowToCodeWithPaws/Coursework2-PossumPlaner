@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/saved"
-        android:layout_width="340dp"
+        android:layout_width="300dp"
         android:layout_height="70dp"
         android:background="@drawable/urgent_important"
         android:gravity="center_horizontal"
@@ -19,7 +19,7 @@
         app:backgroundTint="#FFB3B3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />

@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/subplan_name"
-        android:layout_width="355dp"
+        android:layout_width="321dp"
         android:layout_height="35dp"
         android:ellipsize="end"
         android:maxLines="1"
@@ -18,9 +18,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/subplan_delete"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_buttons"
+        app:icon="@android:drawable/ic_menu_delete"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.994"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/subplan_name"
+        app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
         android:id="@+id/subplan_checkBox"

@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -62,6 +63,9 @@ class DeadlineEditAdapter(private val sublpans: ArrayList<Subplan>) :
 
                 override fun afterTextChanged(editable: Editable) {}
             })
+
+            val deleteButton : Button = itemView.findViewById(R.id.subplan_delete)
+            deleteButton.setOnClickListener { deadlineToEdit.subplans.remove(subplan) }
         }
     }
 }
