@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     lateinit var a: Objects
-    var visitedSecond: Boolean = false
+  //  var visitedSecond: Boolean = false
     var new_user: User = User()
     var authed: Boolean = false
 
@@ -110,12 +110,12 @@ class MainActivity : AppCompatActivity() {
             input.text = StringBuilder().append("Вы авторизированы, ваш email: ").append(user.email)
                     .toString()
 
-            if (!visitedSecond) {
+        //    if (!visitedSecond) {
                 passed_user = new_user
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
                 startActivity(randomIntent)
-                visitedSecond = true
-            }
+            //    visitedSecond = true
+          //  }
         } else {
             updateUI("Нет пользователя")
         }
@@ -145,12 +145,12 @@ class MainActivity : AppCompatActivity() {
             new_user = gson.fromJson(sharedPref.getString("User", ""), User::class.java)
             println("входим " + sharedPref.getString("User", ""))
             println("user  " + new_user.toString())
-            if (!visitedSecond) {
+     //       if (!visitedSecond) {
                 passed_user = new_user
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
                 startActivity(randomIntent)
-                visitedSecond = true
-            }
+         //       visitedSecond = true
+       //     }
     //    } catch (e: NullPointerException) {
 //            updateUI("Не получилось получить сохраненные данные")
 //            println(e.stackTrace)
@@ -212,12 +212,12 @@ class MainActivity : AppCompatActivity() {
                 new_user.token = account.idToken.toString();
                 println("входим " + sharedPref.getString("User", ""))
                 println("user  " + new_user.toString())
-                if (!visitedSecond) {
+          //      if (!visitedSecond) {
                     passed_user = new_user
                     val randomIntent = Intent(this, BottomNavigationScreen::class.java)
                     startActivity(randomIntent)
-                    visitedSecond = true
-                }
+            //        visitedSecond = true
+            //    }
             } catch (e: NullPointerException) {
                 updateUI("Не получилось получить сохраненные данные")
                 println(e.stackTrace)
@@ -225,7 +225,7 @@ class MainActivity : AppCompatActivity() {
                 passed_user = new_user
                 val randomIntent = Intent(this, BottomNavigationScreen::class.java)
                 startActivity(randomIntent)
-                visitedSecond = true
+      //          visitedSecond = true
             }
 
         }
@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity() {
 
             val randomIntent = Intent(this, BottomNavigationScreen::class.java)
             startActivity(randomIntent)
-            visitedSecond = true
+       //     visitedSecond = true
         }
 
     }

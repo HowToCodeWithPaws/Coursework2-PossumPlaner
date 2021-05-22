@@ -55,7 +55,7 @@ class AuthManager(m: MainActivity) {
 
             // Signed in successfully, show authenticated UI.
             if (account != null) {
-                mainActivity.updateUI(account)
+                mainActivity.updateUIError(account)
             }
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.

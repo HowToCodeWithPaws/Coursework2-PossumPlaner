@@ -126,7 +126,7 @@ class DatebaseManager(private val mainActivity: MainActivity) {
                     if (ar.size > 0) {
                         c.category = ar[0]
                     }
-                    user.addPlan(c)
+                    user.plans.add(c)
                 })
             user
         } catch (ex: NullPointerException) {
